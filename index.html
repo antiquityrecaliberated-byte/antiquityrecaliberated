@@ -46,12 +46,19 @@
   /* HOOK — the opening question */
   .hook{padding:64px 0 56px; border-bottom:1px solid var(--rule);}
   .hook .wrap{max-width:860px;}
-  .hook-row{display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:24px;}
+  .hook-row{display:grid; grid-template-columns:auto 1fr auto; align-items:flex-start; gap:24px;}
   .hook-side{width:170px; max-width:170px; height:auto; object-fit:contain;}
   .hook-body{text-align:center;}
   .hook .hook-q{font-size:clamp(1.7rem,3.6vw,2.5rem); line-height:1.18; color:var(--ink); margin:0;}
   .hook p{font-size:1.08rem; color:var(--ink-dim); margin:20px 0 0;}
   .hook p strong{color:var(--ink); font-weight:600;}
+  .hook-table-wrap{margin-top:20px; overflow-x:auto;}
+  .hook-table{width:100%; border-collapse:collapse; margin-top:16px;}
+  .hook-table th,
+  .hook-table td{padding:14px 16px; border:1px solid rgba(27,24,21,0.12);}
+  .hook-table th{font-family:'IBM Plex Mono',monospace; font-size:0.84rem; text-transform:uppercase; letter-spacing:0.08em; color:var(--bronze-bright); background:rgba(230,210,173,0.5); text-align:left;}
+  .hook-table tbody tr:nth-child(even){background:rgba(255,255,255,0.72);}
+  .hook-table td{font-size:0.95rem; color:var(--ink-dim);}
   @media (max-width:760px){
     .hook-row{grid-template-columns:1fr; gap:18px;}
     .hook-side{max-width:180px; margin:0 auto;}
@@ -525,6 +532,33 @@
           <p>But a forgotten four-inch measure &mdash; the <strong>Miti Riyana</strong> &mdash; produces a height of exactly <strong>six feet</strong>.</p>
           <p class="hook-follow">Have we misunderstood an ancient measurement for centuries?</p>
           <a class="hook-cta" href="#discoveries" data-open-discovery="miti-riyana">Discover the evidence behind the forgotten Miti Riyana <span aria-hidden="true">&rarr;</span></a>
+          <h2 class="hook-q display">One Island, Two Ancient Measurements</h2>
+          <p>Could the Lost Yojana Unlock the Geography of Early Lanka?</p>
+          <p>Two respected ancient records describe the same island in yojanas &mdash; yet they give two different sets of measurements. That difference may hold an important clue to how we understand the geography of early Lanka and the wider Buddhist world.</p>
+          <div class="hook-table-wrap">
+            <table class="hook-table" role="table">
+              <caption>Ancient source comparison of island dimensions</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Ancient source</th>
+                  <th scope="col">Length</th>
+                  <th scope="col">Breadth</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Dipavamsa, Chapter XVII</td>
+                  <td>32 yojanas</td>
+                  <td>18 yojanas</td>
+                </tr>
+                <tr>
+                  <td>Faxian's travel record</td>
+                  <td>50 yojanas</td>
+                  <td>30 yojanas</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
         <img class="hook-side" src="boo.png" alt="Right decorative image">
       </div>
@@ -1021,7 +1055,7 @@
 
       <div class="source-feature">
         <figure class="source-img">
-          <img src="2.png" alt="Cover of the 1916 printed edition of the Sirilaka Kadaim Pota">
+          <img src="test.png" alt="Cover of the 1916 printed edition of the Sirilaka Kadaim Pota">
           <figcaption>Sirilaka Kadaim Pota, printed edition of 1916 (B.E. 2460), ed. K.M.S. de Silva</figcaption>
         </figure>
         <div class="source-body">
@@ -1222,7 +1256,7 @@
         <a class="blog-card" href="#"><span class="bno">03</span><h4>The Five Great Rivers and the Nadi Chakra of the Amban Ganga</h4></a>
         <a class="blog-card" href="#"><span class="bno">04</span><h4>Reading Inscriptions in the Field</h4></a>
         <a class="blog-card" href="#"><span class="bno">05</span><h4>What Archaeologists Can Learn from Ancient Measurements</h4></a>
-        <a class="blog-card" href="#"><span class="bno">06</span><h4>One Island, Two Ancient Measurements: Could the Lost Yojana Unlock the Geography of Early Lanka?</h4></a>
+        <a class="blog-card" href="https://drive.google.com/file/d/1lMadLqTW2GNT4PKmWeFsPxRPVfZvl7UO/view?usp=sharing"><span class="bno">06</span><h4>One Island, Two Ancient Measurements: Could the Lost Yojana Unlock the Geography of Early Lanka?</h4></a>
       </div>
     </div>
   </section>

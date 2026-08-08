@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Antiquity Recalibrated &mdash; Dr K.L. Fernando</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Warm Manuscript theme -- brighter, richer accents */
+    --stone-900:#f3ead2; --stone-800:#ecdfbe; --stone-700:#e0cfa4;
+    --parchment:#fbf5e4; --ink:#111111; --ink-dim:#222222;
+    --bronze:#8b0f0f; --bronze-bright:#6f0b0b; --vermilion:#8b0f0f; --verdigris:#8b0f0f;
+    --rule:rgba(168,90,18,0.30); --max:1160px;
+  }
+  /* Alternating section bands: base is light parchment; band-light is a DEEPER
+     parchment so the rhythm of the page survives the light theme. */
+  section.band-light{
+    --stone-900:#e7d6ac; --stone-800:#dcc894; --stone-700:#d0ba82;
+    --ink:#201a0d; --ink-dim:#4c3f22; --rule:rgba(150,70,20,0.26);
+    background:var(--stone-900); color:var(--ink);
+  }
+  section.band-light .eyebrow{color:var(--vermilion);}
+  section.band-light .eyebrow::before{background:var(--vermilion);}
+  section.band-light .tl-year, section.band-light .tl-plus, section.band-light .prog-no,
+  section.band-light .disc-plus, section.band-light .bno{color:var(--vermilion);}
+  section.band-light .btn.ghost{border-color:var(--rule);}
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; background:var(--stone-900); color:var(--ink); font-family:'Work Sans',sans-serif; font-size:17px; line-height:1.7; -webkit-font-smoothing:antialiased;}
+  @media (prefers-reduced-motion: reduce){ *{animation-duration:.001ms !important; transition-duration:.001ms !important;} }
+  h1,h2,h3,h4,.display{font-family:'Fraunces',serif; font-weight:600; letter-spacing:-0.01em; margin:0;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+  img,svg{display:block; max-width:100%;}
+  button{font:inherit;}
+
+  .google-translate-widget{display:none !important; visibility:hidden !important; width:0 !important; height:0 !important; overflow:hidden !important; position:absolute !important; left:-9999px !important; top:-9999px !important;}
+  body > .skiptranslate{display:none !important;}
+  .goog-te-banner-frame, .goog-te-menu-frame, .goog-te-combo, .goog-te-gadget{display:none !important; visibility:hidden !important; height:0 !important; width:0 !important; overflow:hidden !important;}
+  .goog-te-spinner-pos{display:none !important;}
+
+  /* HOOK — the opening question */
+  .hook{padding:64px 0 56px; border-bottom:1px solid var(--rule);}
+  .hook .wrap{max-width:860px;}
+  .hook-row{display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:24px;}
+  .hook-side{width:170px; max-width:170px; height:auto; object-fit:contain;}
+  .hook-body{text-align:center;}
+  .hook .hook-q{font-size:clamp(1.7rem,3.6vw,2.5rem); line-height:1.18; color:var(--ink); margin:0;}
+  .hook p{font-size:1.08rem; color:var(--ink-dim); margin:20px 0 0;}
+  .hook p strong{color:var(--ink); font-weight:600;}
+  @media (max-width:760px){
+    .hook-row{grid-template-columns:1fr; gap:18px;}
+    .hook-side{max-width:180px; margin:0 auto;}
+  }
+  .hook .hook-follow{font-family:'Fraunces',serif; font-weight:600; font-size:1.3rem; color:var(--ink); margin-top:30px; line-height:1.3;}
+  .hook-cta{display:inline-flex; align-items:center; gap:8px; margin-top:26px; color:var(--bronze-bright); text-decoration:none; font-weight:500; font-size:1.02rem; border-bottom:1px solid transparent; transition:border-color .2s, gap .2s;}
+  .hook-cta:hover{border-color:var(--bronze-bright); gap:14px;}
+
+  /* NAV */
+  header.site{position:sticky; top:0; z-index:50; background:rgba(243,234,210,0.93); backdrop-filter:blur(8px); border:1px solid rgba(0,0,0,0.08); border-bottom:none; border-radius:0 0 16px 16px;}
+  .navbar{display:flex; align-items:center; justify-content:space-between; padding:15px 32px; max-width:var(--max); margin:0 auto; gap:20px; flex-wrap:wrap;}
+  .nav-actions{display:flex; align-items:center; gap:14px;}
+  .wordmark{font-family:'Fraunces',serif; font-size:1.05rem; font-weight:600; text-decoration:none; color:var(--ink); line-height:1.1;}
+  .wordmark em{color:var(--bronze-bright); font-style:italic; font-weight:500;}
+  .wordmark small{display:block; font-family:'IBM Plex Mono',monospace; font-size:0.62rem; color:var(--ink-dim); font-weight:400; letter-spacing:0.06em; margin-top:2px;}
+  nav.links{display:flex; gap:24px; align-items:center;}
+  nav.links a{text-decoration:none; color:var(--ink-dim); font-size:0.76rem; text-transform:uppercase; letter-spacing:0.06em; border-bottom:1px solid transparent; padding-bottom:3px; transition:color .2s, border-color .2s; white-space:nowrap;}
+  nav.links a:hover, nav.links a:focus-visible{color:var(--bronze-bright); border-color:var(--bronze);}
+  .nav-cta{background:var(--bronze); color:#ffffff !important; padding:8px 15px; border-radius:20px; font-weight:500;}
+  .menu-btn{display:none; background:none; border:1px solid var(--rule); color:var(--ink); border-radius:6px; padding:7px 12px; font-size:0.85rem;}
+  @media (max-width:920px){
+    nav.links{position:fixed; inset:58px 0 0 0; background:var(--stone-900); flex-direction:column; align-items:flex-start; padding:26px 32px; gap:18px; transform:translateY(-110%); transition:transform .3s ease; overflow-y:auto;}
+    nav.links.open{transform:translateY(0);}
+    .menu-btn{display:block;}
+  }
+
+  /* HERO — full-bleed */
+  .hero{position:relative; min-height:64vh; display:flex; align-items:flex-end; overflow:hidden; border-bottom:1px solid var(--rule);}
+  .hero-media{position:absolute; inset:0; z-index:0;}
+  .hero-media img{width:100%; height:100%; object-fit:cover; object-position:center 32%; filter:grayscale(25%) brightness(0.55);}
+  .hero-media::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(27,24,21,0.15) 0%, rgba(27,24,21,0.6) 45%, rgba(27,24,21,0.97) 92%);}
+  .hero-copy{position:relative; z-index:1; padding:60px 0 54px; width:100%;}
+  /* Hero and chapter-breaks sit over dark photos -- keep their text light in any theme. */
+  .hero .eyebrow, .chapter-break .eyebrow{color:#ffffff;}
+  .hero .eyebrow::before{background:#ffffff;}
+  .hero h1.title, .hero-byline{color:#ffffff;}
+  .hero .quote-line, .chapter-cite{color:#ffffff;}
+  .hero .quote-line{border-left-color:#ffffff;}
+  .chapter-quote{color:#ffffff;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:0.74rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--bronze-bright); margin-bottom:16px; display:flex; align-items:center; gap:10px;}
+  .eyebrow::before{content:""; width:26px; height:1px; background:var(--bronze);}
+  h1.title{font-size:clamp(2.3rem,5.6vw,4.2rem); line-height:1.02; color:var(--ink); text-shadow:0 2px 22px rgb(253, 251, 251);}
+  .hero-byline{font-family:'IBM Plex Mono',monospace; font-size:0.82rem; color:var(--ink-dim); margin-top:14px;}
+  .quote-line{font-style:italic; color:var(--bronze-bright); font-size:1.05rem; margin-top:18px; max-width:56ch; border-left:2px solid var(--bronze); padding-left:16px;}
+  .hero-ctas{display:flex; gap:14px; margin-top:28px; flex-wrap:wrap;}
+  .btn{font-family:'IBM Plex Mono',monospace; font-size:0.8rem; padding:12px 22px; border-radius:30px; text-decoration:none; display:inline-block; transition:transform .2s, background .2s;}
+  .btn:hover{transform:translateY(-1px);}
+  .btn.primary{background:var(--bronze); color:#ffffff;}
+  .btn.ghost{border:1px solid var(--rule); color:var(--ink);}
+  .hero .btn.ghost{border-color:rgba(244,236,218,0.5); color:var(--ink);}
+  .hero-questions{display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:34px;}
+  @media (max-width:760px){ .hero-questions{grid-template-columns:1fr 1fr;} }
+  .hq{border:1px solid rgba(244,236,218,0.28); background:rgba(27,24,21,0.4); backdrop-filter:blur(3px); padding:14px 16px; border-radius:2px; font-size:0.82rem; color:#ffffff; text-decoration:none; transition:border-color .2s, color .2s;}
+  .hq span{display:block; font-family:'IBM Plex Mono',monospace; color:#ffffff; font-size:0.68rem; margin-bottom:6px;}
+  .hq:hover{border-color:var(--bronze); color:#ffffff;}
+
+  /* CHAPTER BREAK — full-bleed photo interludes between sections */
+  .chapter-break{position:relative; padding:100px 0; background-size:cover; background-position:center; border-bottom:1px solid var(--rule); border-top:1px solid var(--rule); overflow:hidden;}
+  .chapter-break::before{content:""; position:absolute; inset:0; background:linear-gradient(100deg, rgba(27,24,21,0.94) 0%, rgba(27,24,21,0.55) 55%, rgba(27,24,21,0.75) 100%);}
+  .chapter-copy{position:relative; max-width:640px;}
+  .chapter-quote{font-family:'Fraunces',serif; font-style:italic; font-size:clamp(1.25rem,2.6vw,1.85rem); color:var(--ink); line-height:1.42;}
+  .chapter-cite{display:block; margin-top:20px; font-family:'IBM Plex Mono',monospace; font-size:0.76rem; color:var(--bronze-bright); letter-spacing:0.02em;}
+
+  section{padding:70px 0;}
+  .section-head{max-width:66ch; margin-bottom:38px; display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap;}
+  h2.h{font-size:clamp(1.5rem,2.6vw,2rem); color:var(--ink);}
+  .section-note{color:var(--ink-dim); font-size:0.9rem; max-width:38ch;}
+  .divider{height:1px; background:var(--rule);}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:320px 1fr; gap:48px;}
+  @media (max-width:800px){ .about-grid{grid-template-columns:1fr;} }
+  .collage{position:relative; height:420px;}
+  @media (max-width:800px){ .collage{height:auto; padding-bottom:70px;} }
+  .collage img{position:absolute; object-fit:cover; box-shadow:0 20px 46px -18px rgba(0,0,0,0.4); border:6px solid #f7f1de;}
+  .collage .img-main{width:82%; height:320px; top:0; left:0; z-index:1;}
+  .collage .img-accent{width:56%; height:190px; bottom:0; right:0; z-index:2;}
+  @media (max-width:800px){
+    .collage .img-main{position:relative; width:100%; height:280px;}
+    .collage .img-accent{position:absolute; width:52%; height:160px; bottom:-70px; right:0;}
+  }
+  .portrait-cap{font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--ink-dim); margin-top:10px;}
+  .about-copy p{color:var(--ink-dim); font-size:0.96rem; margin:0 0 16px;}
+  .about-copy strong{color:var(--ink);}
+  .pull{font-family:'Fraunces',serif; font-style:italic; font-size:1.2rem; color:var(--vermilion); margin:22px 0; line-height:1.4;}
+
+  /* TIMELINE (interactive accordion — signature element) */
+  .timeline{border-top:1px solid var(--rule);}
+  .tl-item{border-bottom:1px solid var(--rule);}
+  .tl-head{display:flex; align-items:center; gap:20px; width:100%; background:none; border:none; color:inherit; text-align:left; padding:20px 0; cursor:pointer;}
+  .tl-year{font-family:'IBM Plex Mono',monospace; font-size:0.85rem; color:var(--bronze-bright); min-width:96px;}
+  .tl-title{font-size:1.02rem; color:var(--ink); flex:1;}
+  .tl-plus{font-family:'IBM Plex Mono',monospace; color:var(--ink-dim); transition:transform .3s ease;}
+  .tl-item.open .tl-plus{transform:rotate(45deg); color:var(--bronze-bright);}
+  .tl-body{max-height:0; overflow:hidden; transition:max-height .4s ease;}
+  .tl-body-inner{padding:0 0 24px 116px; color:var(--ink-dim); font-size:0.9rem;}
+  @media (max-width:600px){ .tl-body-inner{padding-left:0;} .tl-year{min-width:70px;} }
+  .tl-body-inner ul{margin:8px 0 0; padding-left:18px;}
+  .tl-body-inner .tag{font-family:'IBM Plex Mono',monospace; font-style:italic; color:var(--bronze-bright); display:block; margin-top:10px;}
+
+  /* METHODOLOGY — converging diagram */
+  .method-wrap{display:grid; grid-template-columns:1fr 1fr; gap:50px; align-items:center;}
+  @media (max-width:860px){ .method-wrap{grid-template-columns:1fr;} }
+  .method-copy p{color:var(--ink-dim); font-size:0.95rem; margin-bottom:14px;}
+  .converge-label{font-family:'IBM Plex Mono',monospace; font-size:0.68rem; fill:var(--ink-dim);}
+
+  /* RESEARCH PROGRAMMES */
+  .prog-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  @media (max-width:900px){ .prog-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:600px){ .prog-grid{grid-template-columns:1fr;} }
+  .prog-card{border:1px solid var(--rule); background:var(--stone-800); padding:22px 20px; border-radius:2px; position:relative; transition:border-color .25s ease, transform .25s ease;}
+  .prog-card:hover, .prog-card:focus-within{border-color:var(--bronze); transform:translateY(-3px);}
+  .prog-icon{width:26px; height:26px; color:var(--vermilion); margin-bottom:12px;}
+  .prog-no{font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--bronze-bright);}
+  .prog-card h3{font-size:1.02rem; margin-top:8px; color:var(--ink);}
+  .prog-tags{margin-top:10px; font-size:0.78rem; color:var(--ink-dim);}
+  .prog-desc{max-height:0; opacity:0; overflow:hidden; font-size:0.85rem; color:var(--ink-dim); transition:max-height .35s ease, opacity .3s ease, margin-top .35s ease;}
+  .prog-card:hover .prog-desc, .prog-card:focus-within .prog-desc{max-height:140px; opacity:1; margin-top:12px;}
+
+  /* DISCOVERIES accordion */
+  .disc-list{border-top:1px solid var(--rule);}
+  .disc-item{border-bottom:1px solid var(--rule);}
+  .disc-head{display:flex; align-items:center; justify-content:space-between; gap:16px; width:100%; background:none; border:none; color:inherit; text-align:left; padding:22px 0; cursor:pointer;}
+  .disc-head h3{font-size:1.08rem; color:var(--ink);}
+  .disc-plus{font-family:'IBM Plex Mono',monospace; color:var(--ink-dim); font-size:1.1rem; transition:transform .3s ease;}
+  .disc-item.open .disc-plus{transform:rotate(45deg); color:var(--bronze-bright);}
+  .disc-body{max-height:0; overflow:hidden; transition:max-height .4s ease;}
+  .disc-body-inner{padding:0 0 26px; display:grid; grid-template-columns:1fr 1fr; gap:26px;}
+  @media (max-width:700px){ .disc-body-inner{grid-template-columns:1fr;} }
+  .disc-body-inner .col span{font-family:'IBM Plex Mono',monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--bronze-bright); display:block; margin-bottom:8px;}
+  .disc-body-inner .col p{font-size:0.88rem; color:var(--ink-dim); margin:0;}
+  .disc-status{grid-column:1/-1; margin-top:4px; font-family:'IBM Plex Mono',monospace; font-size:0.76rem; color:var(--verdigris); border-top:1px solid var(--rule); padding-top:14px;}
+  .core-badge{display:inline-block; margin-left:10px; font-family:'IBM Plex Mono',monospace; font-size:0.6rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--vermilion); border:1px solid var(--vermilion); border-radius:12px; padding:2px 9px; vertical-align:middle; font-weight:400;}
+  .hypothesis-badge{display:inline-block; margin-left:10px; font-family:'IBM Plex Mono',monospace; font-size:0.6rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--verdigris); border:1px solid var(--verdigris); border-radius:12px; padding:2px 9px; vertical-align:middle; font-weight:400;}
+  .disc-body-inner--wide{grid-template-columns:1fr 1fr; grid-template-areas:"summary evidence" "correspondences correspondences" "figure figure";}
+  .disc-body-inner--wide .col:nth-child(1){grid-area:summary;}
+  .disc-body-inner--wide .col:nth-child(2){grid-area:evidence;}
+  .disc-correspondences{grid-area:correspondences; border-top:1px solid var(--rule); padding-top:16px; margin-top:4px;}
+  .corr-row{display:grid; grid-template-columns:170px 1fr; gap:16px; padding:10px 0; border-bottom:1px solid var(--rule);}
+  @media (max-width:700px){ .corr-row{grid-template-columns:1fr;} }
+  .corr-ic{font-family:'IBM Plex Mono',monospace; font-size:0.74rem; color:var(--bronze-bright);}
+  .corr-text{font-size:0.86rem; color:var(--ink-dim);}
+  .corr-caveat{font-size:0.78rem; color:var(--verdigris); margin-top:14px; font-style:italic;}
+  .disc-figure{grid-area:figure; margin:14px 0 0; border:1px solid var(--rule); background:var(--stone-900); padding:16px; text-align:center; border-radius:2px;}
+  .disc-figure img{max-height:520px; margin:0 auto; border:1px solid var(--rule);}
+  .disc-figure figcaption{margin-top:12px; font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--ink-dim);}
+  .disc-figure--wide{grid-column:1/-1;}
+  .disc-figure--wide figcaption{max-width:60ch; margin-left:auto; margin-right:auto;}
+  .disc-figure--wide figcaption em{color:var(--ink); font-style:italic;}
+  @media (max-width:700px){ .disc-body-inner--wide{grid-template-columns:1fr; grid-template-areas:"summary" "evidence" "correspondences" "figure";} }
+
+  /* PUBLICATIONS & MEDIA */
+  .pm-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+  @media (max-width:760px){ .pm-grid{grid-template-columns:repeat(2,1fr);} }
+  .pm-tile{border:1px solid var(--rule); padding:24px 16px; text-align:center; border-radius:2px; transition:border-color .2s, transform .2s;}
+  .pm-tile:hover{border-color:var(--bronze); transform:translateY(-2px);}
+  .pm-tile .icon{width:30px; height:30px; margin:0 auto 12px; color:var(--bronze-bright);}
+  .pm-tile h4{font-size:0.88rem; font-weight:600; color:var(--ink);}
+  .pm-tile .count{font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--ink-dim); margin-top:4px; display:block;}
+
+  .gallery{display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:150px; grid-auto-flow:dense; gap:10px; margin-top:36px;}
+  .gallery .g-big{grid-column:span 2; grid-row:span 2;}
+  .gallery .g-small{grid-column:span 2; grid-row:span 1;}
+  @media (max-width:760px){ .gallery{grid-template-columns:repeat(2,1fr);} .gallery .g-big{grid-column:span 2; grid-row:span 2;} .gallery .g-small{grid-column:span 1;} }
+  .gallery figure{margin:0; position:relative; overflow:hidden; border:1px solid var(--rule); border-radius:2px;}
+  .gallery img{width:100%; height:100%; object-fit:cover; transition:transform .4s ease; filter:grayscale(15%);}
+  .gallery figure:hover img{transform:scale(1.06); filter:grayscale(0%);}
+  .gallery figcaption{position:absolute; left:0; right:0; bottom:0; padding:9px 12px; background:linear-gradient(0deg, rgba(0,0,0,0.8), transparent); font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:#ffffff;}
+
+  .presentation-list{margin-top:40px; border-top:1px solid var(--rule); padding-top:8px;}
+  .presentation-row{display:flex; gap:20px; padding:18px 0; border-bottom:1px solid var(--rule); align-items:baseline; flex-wrap:wrap;}
+  .presentation-row .pdate{font-family:'IBM Plex Mono',monospace; font-size:0.76rem; color:var(--vermilion); min-width:150px;}
+  .presentation-row .ptitle{font-size:0.94rem; color:var(--ink);}
+  .cert-strip{display:grid; grid-template-columns:150px 1fr; gap:24px; align-items:center; margin-top:30px; border:1px solid var(--rule); padding:20px; border-radius:2px; background:var(--stone-800);}
+  @media (max-width:600px){ .cert-strip{grid-template-columns:1fr; gap:14px;} }
+  .cert-strip img{width:100%; border:1px solid var(--rule);}
+  .cert-label{font-family:'IBM Plex Mono',monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--verdigris); display:block; margin-bottom:8px;}
+  .cert-note p{font-size:0.9rem; color:var(--ink-dim); margin:0; line-height:1.6;}
+
+  /* BLOG */
+  .blog-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px;}
+  @media (max-width:860px){ .blog-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:600px){ .blog-grid{grid-template-columns:1fr;} }
+  .blog-card{border:1px solid var(--rule); padding:20px; border-radius:2px; text-decoration:none; display:block; transition:border-color .2s;}
+  .blog-card:hover{border-color:var(--bronze);}
+  .blog-card .bno{font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--bronze-bright);}
+  .blog-card h4{font-size:0.98rem; margin-top:8px; color:var(--ink); font-weight:600; font-family:'Work Sans',sans-serif;}
+
+  /* CONTACT */
+  .contact-band{background:#2b2416; color:#ffffff; border-radius:2px; padding:46px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:24px;}
+  .contact-band h2.h{color:#ffffff;}
+  .contact-band p{color:#ffffff; max-width:42ch; margin-top:10px;}
+  .contact-form{display:grid; gap:12px; width:min(100%, 480px); margin-top:18px;}
+  .contact-form label{font-family:'IBM Plex Mono',monospace; font-size:0.75rem; letter-spacing:0.06em; text-transform:uppercase; color:#f7efe2;}
+  .contact-form input,
+  .contact-form textarea{width:100%; border:1px solid rgba(255,255,255,0.24); background:rgba(255,255,255,0.08); color:#ffffff; padding:12px 14px; border-radius:6px; font:inherit;}
+  .contact-form textarea{min-height:120px; resize:vertical;}
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder{color:rgba(255,255,255,0.7);}
+  .contact-form .btn{border:none; cursor:pointer;}
+  .btn{font-family:'IBM Plex Mono',monospace; font-size:0.8rem; padding:12px 22px; border-radius:30px; text-decoration:none; display:inline-block; transition:transform .2s;}
+  .btn:hover{transform:translateY(-1px);}
+  .btn.primary{background:var(--vermilion); color:#ffffff;}
+
+  footer{padding:36px 0 56px; border-top:1px solid var(--rule);}
+  footer .wrap{display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; font-size:0.78rem; color:var(--ink-dim);}
+  footer .mono{color:var(--bronze-bright);}
+
+  @media (max-width:980px) {
+    .section-head{flex-direction:column; align-items:flex-start;}
+    .section-head > div{width:100%;}
+    .section-note{max-width:100%;}
+    section{padding:50px 0;}
+    .wrap{padding:0 24px;}
+  }
+
+  @media (max-width:760px) {
+    .hero-copy{padding:40px 0 30px;}
+    .hero-questions{grid-template-columns:1fr;}
+    .hero .quote-line{font-size:1rem; padding-left:12px; max-width:100%;}
+    .converter{padding:24px;}
+    .conv-controls{flex-direction:column; align-items:flex-start; gap:18px;}
+    .conv-toggle{width:100%; justify-content:center; flex-wrap:wrap;}
+    .ct-btn{flex:1 1 auto; min-width:120px; text-align:center;}
+    .conv-slider-row{width:100%; flex-direction:column; align-items:flex-start;}
+    .conv-slider-row label{white-space:normal;}
+    .conv-readout{flex-direction:column; align-items:flex-start; gap:16px;}
+    .conv-result{display:flex; align-items:flex-end; gap:10px;}
+    .conv-scale{padding-top:18px;}
+    .comparator-head{flex-direction:column; align-items:flex-start;}
+    .ry-toggle{width:100%; justify-content:center; flex-wrap:wrap;}
+    .ry-btn{flex:1 1 auto; min-width:130px; text-align:center;}
+    .comparator-foot{font-size:0.88rem;}
+    .fourinch-block{margin-top:32px;}
+    .ev-row{grid-template-columns:1fr; gap:10px;}
+    .dtest{grid-template-columns:1fr; gap:26px;}
+    .contact-band{padding:32px;}
+    footer .wrap{flex-direction:column; align-items:flex-start;}
+  }
+
+  @media (max-width:520px) {
+    body{font-size:16px;}
+    .wrap{padding:0 16px;}
+    section{padding:36px 0;}
+    .navbar{padding:15px 16px;}
+    nav.links{padding:28px 20px 24px;}
+    .hero-copy{padding:30px 0 24px;}
+    .hero .hook-follow, .hero p{font-size:0.95rem;}
+    .hook .hook-q{font-size:clamp(1.8rem, 7vw, 2.4rem);}
+    .conv-slider-row{flex-direction:column; align-items:flex-start;}
+    .scale-cap{text-align:left;}
+    .pl-eq{flex-direction:column; align-items:flex-start;}
+    .dstep{padding:14px 0;}
+    .pl-detail{padding:24px 18px;}
+    .source-feature{grid-template-columns:1fr;}
+    .source-feature img{width:100%;}
+  }
+
+  /* INTERACTIVE: YOJANA CONVERTER */
+  .converter{border:1px solid var(--rule); background:var(--stone-800); border-radius:2px; padding:32px;}
+  .conv-controls{display:flex; flex-wrap:wrap; gap:28px; justify-content:space-between; align-items:center; padding-bottom:26px; border-bottom:1px solid var(--rule);}
+  .conv-toggle{display:inline-flex; border:1px solid var(--rule); border-radius:30px; padding:4px; background:var(--stone-900);}
+  .ct-btn{font-family:'IBM Plex Mono',monospace; font-size:0.78rem; background:transparent; border:none; color:var(--ink-dim); padding:9px 18px; border-radius:24px; cursor:pointer; transition:background .25s, color .25s;}
+  .ct-btn.active{background:var(--bronze); color:#ffffff; font-weight:500;}
+  .conv-slider-row{display:flex; align-items:center; gap:14px; flex:1; min-width:280px;}
+  .conv-slider-row label{font-size:0.82rem; color:var(--ink-dim); white-space:nowrap;}
+  .conv-slider-row input[type=range]{flex:1; accent-color:var(--bronze);}
+  .conv-slider-row span{font-family:'IBM Plex Mono',monospace; font-size:0.82rem; color:var(--bronze-bright); min-width:82px; text-align:right;}
+  .conv-readout{display:flex; align-items:baseline; gap:20px; padding:26px 0; flex-wrap:wrap;}
+  .conv-num{font-family:'Fraunces',serif; font-size:3.4rem; font-weight:600; color:var(--bronze-bright); line-height:1; transition:color .3s;}
+  .conv-num.over{color:var(--vermilion);}
+  .conv-unit{font-family:'IBM Plex Mono',monospace; font-size:1rem; color:var(--ink-dim);}
+  .conv-verdict{font-family:'Fraunces',serif; font-style:italic; font-size:1.15rem; color:var(--ink); flex:1; min-width:220px;}
+  .conv-scale{border-top:1px solid var(--rule); padding-top:22px;}
+  .scale-row{display:grid; grid-template-columns:180px 1fr 70px; gap:14px; align-items:center;}
+  @media (max-width:640px){ .scale-row{grid-template-columns:1fr; gap:6px;} }
+  .scale-label{font-size:0.8rem; color:var(--ink-dim);}
+  .scale-track{position:relative; height:14px; background:var(--stone-900); border-radius:8px; overflow:hidden;}
+  .scale-ref{position:absolute; inset:0; background:repeating-linear-gradient(90deg, transparent, transparent 8px, var(--rule) 8px, var(--rule) 9px);}
+  .scale-bar{position:absolute; left:0; top:0; bottom:0; width:20%; background:var(--bronze); border-radius:8px; transition:width .5s cubic-bezier(.2,.8,.2,1), background .3s;}
+  .scale-bar.over{background:var(--vermilion);}
+  .scale-cap{font-size:0.72rem; color:var(--ink-dim); text-align:right;}
+  .conv-note{font-size:0.86rem; color:var(--ink-dim); margin-top:16px; line-height:1.6;}
+
+  /* SOURCE SPOTLIGHT */
+  .source-feature{display:grid; grid-template-columns:300px 1fr; gap:44px; align-items:start;}
+  @media (max-width:800px){ .source-feature{grid-template-columns:1fr; gap:28px;} }
+  .source-img{margin:0; border:1px solid var(--rule); padding:10px; background:var(--stone-800);}
+  .source-img img{width:100%;}
+  .source-img figcaption{font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--ink-dim); margin-top:10px; text-align:center; line-height:1.5;}
+  .source-lead{font-size:1.02rem; color:var(--ink-dim); margin:0 0 16px;}
+  .source-lead strong, .source-body strong{color:var(--ink);}
+  .source-body p{color:var(--ink-dim); font-size:0.95rem; margin:0 0 16px;}
+  .source-callout{border-left:2px solid var(--bronze); padding:4px 0 4px 18px; margin-top:22px; border-radius:0;}
+  .sc-label{font-family:'IBM Plex Mono',monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--bronze-bright); display:block; margin-bottom:6px;}
+  .source-callout p{font-size:0.92rem; color:var(--ink-dim); margin:0;}
+  .sc-hedge{color:var(--verdigris); font-style:italic;}
+
+  /* RIYANA COMPARATOR */
+  .riyana-block{margin-top:20px;}
+  .riyana-head{margin:0 0 20px;}
+  .riyana-title{font-family:'Fraunces',serif; font-size:1.3rem; color:var(--ink); font-weight:600;}
+  .riyana-title em{font-style:italic; color:var(--bronze-bright);}
+  .riyana-sub{font-size:0.92rem; color:var(--ink-dim); margin-top:8px;}
+  .comparator{background:var(--stone-800); border:1px solid var(--rule); border-radius:2px; padding:32px;}
+  .comparator-head{display:flex; flex-wrap:wrap; gap:20px; align-items:center; justify-content:space-between; margin-bottom:30px;}
+  .ry-toggle{display:inline-flex; border:1px solid var(--rule); border-radius:30px; padding:4px; background:var(--stone-900);}
+  .ry-btn{font-family:'IBM Plex Mono',monospace; font-size:0.78rem; background:transparent; border:none; color:var(--ink-dim); padding:9px 18px; border-radius:24px; cursor:pointer; transition:background .25s, color .25s;}
+  .ry-btn.active{background:var(--bronze); color:#ffffff; font-weight:500;}
+  .ry-readout{font-size:0.78rem; color:var(--ink-dim);}
+  .ry-readout span{color:var(--bronze-bright);}
+  .ry-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:22px;}
+  @media (max-width:820px){ .ry-grid{grid-template-columns:1fr;} }
+  .ry-case{border:1px solid var(--rule); padding:22px 20px; border-radius:2px; background:linear-gradient(180deg, rgba(156,90,44,0.05), transparent 42%);}
+  .ry-case h4{font-size:1.02rem; color:var(--ink); font-weight:600;}
+  .ry-src{font-size:0.74rem; color:var(--ink-dim); margin-top:4px; font-style:italic;}
+  .ry-num{font-family:'Fraunces',serif; font-size:2.1rem; color:var(--bronze-bright); margin-top:16px; line-height:1; transition:color .3s;}
+  .ry-num.over{color:var(--vermilion);}
+  .ry-track{height:6px; background:var(--stone-900); border-radius:4px; margin-top:14px; overflow:hidden;}
+  .ry-fill{height:100%; background:var(--bronze); border-radius:4px; transition:width .5s cubic-bezier(.2,.8,.2,1), background .4s; width:20%;}
+  .ry-fill.over{background:var(--vermilion);}
+  .ry-verdict{font-size:0.82rem; color:var(--verdigris); margin-top:14px; min-height:34px;}
+  .comparator-foot{margin-top:26px; font-size:0.82rem; color:var(--ink-dim); border-top:1px solid var(--rule); padding-top:18px;}
+
+  /* DISTANCE TEST */
+  .dtest{display:grid; grid-template-columns:1fr 1fr; gap:36px; align-items:start;}
+  @media (max-width:820px){ .dtest{grid-template-columns:1fr; gap:26px;} }
+  .dtest-figure{margin:0; border:1px solid var(--rule); background:var(--stone-800); padding:12px; border-radius:2px;}
+  .dtest-figure img{width:100%; border:1px solid var(--rule);}
+  .dtest-figure figcaption{margin-top:12px; font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--ink-dim); line-height:1.55;}
+  .dtest-steps{display:flex; flex-direction:column; gap:0;}
+  .dstep{border-top:1px solid var(--rule); padding:16px 0;}
+  .dstep:first-child{border-top:none; padding-top:0;}
+  .dstep-k{font-family:'IBM Plex Mono',monospace; font-size:0.7rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--bronze-bright); display:block; margin-bottom:8px;}
+  .dstep p{margin:0; font-size:0.95rem; color:var(--ink-dim); line-height:1.6;}
+  .dstep p strong{color:var(--bronze-bright); font-weight:600;}
+  .dstep p em{color:var(--ink); font-style:italic;}
+  .dstep-note{border-top:1px solid var(--rule); margin-top:6px;}
+  .dstep-note .dstep-k{color:var(--verdigris);}
+  .dstep-soft{color:var(--verdigris); font-style:italic;}
+
+  /* FOUR-INCH EVIDENCE LIST */
+  .fourinch-block{margin-top:44px;}
+  .fourinch-head{margin:0 0 20px;}
+  .ev-stack{display:flex; flex-direction:column; border-top:1px solid var(--rule);}
+  .ev-row{display:grid; grid-template-columns:220px 1fr; gap:36px; padding:24px 0; border-bottom:1px solid var(--rule);}
+  @media (max-width:700px){ .ev-row{grid-template-columns:1fr; gap:8px;} }
+  .ev-who{font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--bronze-bright);}
+  .ev-row p{margin:0; color:var(--ink-dim); font-size:0.95rem;}
+  .ev-row p em{color:var(--ink); font-style:italic;}
+
+  /* PLACE IDENTIFICATIONS */
+  .places{display:grid; grid-template-columns:260px 1fr; gap:2px; background:var(--rule); border:1px solid var(--rule); border-radius:2px; overflow:hidden;}
+  @media (max-width:760px){ .places{grid-template-columns:1fr;} }
+  .pl-list{background:var(--stone-800); display:flex; flex-direction:column;}
+  .pl-item{display:flex; flex-direction:column; gap:2px; text-align:left; background:transparent; border:none; border-bottom:1px solid var(--rule); padding:16px 20px; cursor:pointer; transition:background .2s;}
+  .pl-item:last-child{border-bottom:none;}
+  .pl-item:hover{background:var(--stone-700);}
+  .pl-item.active{background:var(--stone-900);}
+  .pl-anc{font-family:'Fraunces',serif; font-size:1rem; font-weight:600; color:var(--ink);}
+  .pl-item.active .pl-anc{color:var(--bronze-bright);}
+  .pl-mod{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--ink-dim);}
+  .pl-detail{background:var(--stone-900); padding:30px 32px;}
+  .pl-eq{display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:6px;}
+  .pl-eq .anc{font-family:'Fraunces',serif; font-size:1.5rem; font-weight:600; color:var(--ink);}
+  .pl-eq .arrow{color:var(--bronze); font-family:'IBM Plex Mono',monospace;}
+  .pl-eq .mod{font-family:'Fraunces',serif; font-size:1.5rem; font-weight:600; color:var(--bronze-bright);}
+  .pl-tag{display:inline-block; font-family:'IBM Plex Mono',monospace; font-size:0.68rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--verdigris); border:1px solid var(--verdigris); border-radius:12px; padding:2px 10px; margin-bottom:18px;}
+  .pl-lead{font-size:0.98rem; color:var(--ink-dim); line-height:1.65; margin:0 0 18px;}
+  .pl-lead em{color:var(--ink); font-style:italic;}
+  .pl-ev{list-style:none; margin:0; padding:0; border-top:1px solid var(--rule);}
+  .pl-ev li{display:grid; grid-template-columns:130px 1fr; gap:16px; padding:12px 0; border-bottom:1px solid var(--rule); font-size:0.88rem; color:var(--ink-dim);}
+  @media (max-width:520px){ .pl-ev li{grid-template-columns:1fr; gap:3px;} }
+  .pl-ev .k{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--bronze-bright);}
+  .pl-ev em{color:var(--ink); font-style:italic;}
+  .pl-foot{margin-top:22px; font-size:0.82rem; color:var(--ink-dim); line-height:1.6;}
+  .map-figures{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-top:34px;}
+  @media (max-width:760px){ .map-figures{grid-template-columns:1fr;} }
+  .mapfig{margin:0; border:1px solid var(--rule); background:var(--stone-800); padding:12px; border-radius:2px;}
+  .mapfig img{width:100%; border:1px solid var(--rule); display:block;}
+  .mapfig figcaption{margin-top:12px; font-size:0.84rem; color:var(--ink-dim); line-height:1.6;}
+  .mapfig figcaption strong{color:var(--ink);}
+  .mapfig figcaption em{color:var(--ink); font-style:italic;}
+  .mapfig--wide{grid-column:1/-1;}
+
+  /* THREE HORIZONS */
+  .horizons{border:1px solid var(--rule); background:var(--stone-800); border-radius:2px; padding:32px;}
+  .hz-tabs{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+  @media (max-width:720px){ .hz-tabs{grid-template-columns:1fr;} }
+  .hz-tab{display:flex; flex-direction:column; gap:4px; text-align:left; background:var(--stone-900); border:1px solid var(--rule); border-radius:2px; padding:16px 18px; cursor:pointer; transition:border-color .25s, background .25s;}
+  .hz-tab:hover{border-color:var(--bronze);}
+  .hz-tab.active{border-color:var(--bronze); background:linear-gradient(180deg, rgba(156,90,44,0.12), transparent);}
+  .hz-tab-era{font-family:'Fraunces',serif; font-size:1.02rem; font-weight:600; color:var(--ink);}
+  .hz-tab.active .hz-tab-era{color:var(--bronze-bright);}
+  .hz-tab-date{font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--ink-dim);}
+  .hz-intro{margin:26px 0 20px; font-size:0.96rem; color:var(--ink-dim); line-height:1.65; border-left:2px solid var(--bronze); padding-left:16px;}
+  .hz-intro strong{color:var(--ink);}
+  .hz-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+  @media (max-width:820px){ .hz-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .hz-grid{grid-template-columns:1fr;} }
+  .hz-card{border:1px solid var(--rule); border-radius:2px; padding:13px 15px; background:var(--stone-900);}
+  .hz-name{font-size:0.92rem; color:var(--ink); font-weight:600;}
+  .hz-meta{font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--bronze-bright); margin-top:5px; display:flex; flex-wrap:wrap; gap:4px 10px;}
+  .hz-role{font-size:0.76rem; color:var(--ink-dim); margin-top:6px; font-style:italic;}
+  .hz-foot{margin-top:24px; font-size:0.82rem; color:var(--ink-dim); border-top:1px solid var(--rule); padding-top:18px; line-height:1.6;}
+
+  /* RESEARCH PRINCIPLES */
+  .principle-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+  @media (max-width:900px){ .principle-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .principle-grid{grid-template-columns:1fr;} }
+  .principle{border:1px solid var(--rule); padding:20px 18px; border-radius:2px;}
+  .principle .pn{font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--bronze-bright);}
+  .principle h4{font-size:0.94rem; margin-top:8px; color:var(--ink);}
+  .principle p{font-size:0.82rem; color:var(--ink-dim); margin-top:8px;}
+
+  .hero .eyebrow, .chapter-break .eyebrow{color:#ffffff;}
+  .hero .eyebrow::before{background:var(--bronze);}
+  .hero h1.title, .hero-byline{color:#ffffff; text-shadow:0 2px 12px rgba(35, 3, 3, 0.636);}
+  .hero .quote-line, .chapter-cite{color:#ffffff;}
+  .hero .quote-line{border-left-color:#ffffff;}
+  .chapter-quote{color:#ffffff;}
+  .hero .btn.ghost{color:#ffffff;}
+  .btn.ghost{color:var(--ink);}
+  .nav-cta{color:#ffffff !important;}
+  .btn.primary{color:#ffffff;}
+  .hq{color:#ffffff;}
+  .hq span{color:#ffffff;}
+  .hq:hover{color:#ffffff;}
+  .contact-band{color:#ffffff;}
+  .contact-band h2.h, .contact-band p{color:#ffffff;}
+  .gallery figcaption{color:#ffffff; text-shadow:0 1px 4px rgba(255,255,255,0.65);}
+
+  p, li, blockquote, figcaption, .section-note, .about-copy p, .method-copy p, .source-lead, .source-body p, .tl-body-inner, .prog-tags, .prog-desc, .disc-body-inner .col p, .corr-text, .conv-note, .scale-label, .pl-lead, .pl-ev li, .pl-foot, .hz-intro, .hz-role, .principle p, .dstep p, .ev-row p, .cert-note p, .ry-readout, .ry-verdict, .comparator-foot, .source-callout p{font-size:1rem; line-height:1.7;}
+  .hook p, .about-copy p, .source-lead, .source-body p, .pl-lead, .hz-intro, .cert-note p, .blog-card h4, .presentation-row .ptitle, .pm-tile h4, .ry-case h4{font-size:1.04rem;}
+  .eyebrow, .hero-byline, .wordmark small, .menu-btn, .nav-cta, .chapter-cite, .portrait-cap, .tl-year, .prog-no, .disc-body-inner .col span, .corr-ic, .pm-tile .count, .presentation-row .pdate, .cert-label, .source-img figcaption, .sc-label, .pl-mod, .pl-tag, .hz-tab-date, .hz-meta, .principle .pn, .dstep-k, .ev-who, .gallery figcaption, .core-badge, .hypothesis-badge, .btn, .conv-slider-row label, .conv-slider-row span, .scale-cap, .ry-src, .disc-status, .source-callout p{font-size:0.95rem;}
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="navbar">
+    <a class="wordmark" href="#top">Antiquity <em>Recalibrated</em><small>Dr K.L. Fernando</small></a>
+    <div class="nav-actions">
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="siteNav">Menu</button>
+    </div>
+    <nav class="links" id="siteNav">
+      <a href="#discoveries">Discoveries</a>
+      <a href="#try-it">Try it</a>
+      <a href="#distance-test">Distance test</a>
+      <a href="#horizons">The pattern</a>
+      <a href="#places">Places</a>
+      <a href="#evidence">Evidence</a>
+      <a href="#sources">Sources</a>
+      <a href="#publications">Publications</a>
+      <a href="#about">About</a>
+      <a href="#contact" class="nav-cta">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HOOK: the opening question -->
+  <section class="hook">
+    <div class="wrap">
+      <div class="hook-row">
+        <img class="hook-side" src="b.png" alt="Left decorative image">
+        <div class="hook-body">
+          <h2 class="hook-q display">Was the Buddha really 27 feet tall?</h2>
+          <p>Ancient texts describe the Buddha as <strong>18 riyana</strong> in height.</p>
+          <p>Using the accepted 18-inch riyana, that makes him an impossible <strong>27 feet tall</strong>.</p>
+          <p>But a forgotten four-inch measure &mdash; the <strong>Miti Riyana</strong> &mdash; produces a height of exactly <strong>six feet</strong>.</p>
+          <p class="hook-follow">Have we misunderstood an ancient measurement for centuries?</p>
+          <a class="hook-cta" href="#discoveries" data-open-discovery="miti-riyana">Discover the evidence behind the forgotten Miti Riyana <span aria-hidden="true">&rarr;</span></a>
+        </div>
+        <img class="hook-side" src="boo.png" alt="Right decorative image">
+      </div>
+    </div>
+  </section>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-media"><img src="white.png" alt="Historic Sri Lankan landscape and archive imagery"></div>
+    <div class="wrap hero-copy">
+      <div class="eyebrow">Reconstructing Early Buddhist Geography</div>
+      <h1 class="title">ANTIQUITY RECALIBRATED</h1>
+      <div class="hero-byline">Dr K.L. Fernando &middot; MBBS, FRCS, FCSSL &middot; Diploma in Archaeology &middot; Certificate in Epigraphy</div>
+      <p class="quote-line">&ldquo;Where archaeology, inscriptions, ancient texts, cartography and measurement converge.&rdquo;</p>
+      <div class="hero-ctas">
+        <a class="btn primary" href="#discoveries">Explore the Discoveries</a>
+        <a class="btn ghost" href="#evidence">Examine the Evidence</a>
+      </div>
+      <div class="hero-questions">
+        <a class="hq" href="#about"><span>01</span>Why does this research matter?</a>
+        <a class="hq" href="#about"><span>02</span>What is Antiquity Recalibrated?</a>
+        <a class="hq" href="#research"><span>03</span>How is it different?</a>
+        <a class="hq" href="#discoveries"><span>04</span>Where do I begin?</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISCOVERIES -->
+  <section id="discoveries">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Discoveries</div>
+          <h2 class="h">Not papers. Just discoveries.</h2>
+        </div>
+        <p class="section-note">Click any discovery for its summary and the evidence behind it.</p>
+      </div>
+
+      <div class="disc-list" id="discList">
+        <div class="disc-item open" id="disc-jambudipa">
+          <button class="disc-head"><h3>Jambud&#299;pa, Relocated</h3><span class="disc-plus">+</span></button>
+          <div class="disc-body"><div class="disc-body-inner disc-body-inner--wide">
+            <div class="col"><span>Summary</span><p>Early Buddhist geography has long placed Jambud&#299;pa on the Indian mainland, largely on the strength of Chinese pilgrim accounts and selectively-read Sri Lankan chronicles. Plotting over a thousand pre-Christian Br&#257;hm&#299; inscriptions &mdash; preserving names such as &#256;nanda, S&#257;riputta, Vis&#257;kh&#257;, and Dhammadinn&#257; &mdash; onto one-inch survey maps produces a different, internally consistent picture: a Jambud&#299;pa located within the island itself, with Lank&#257;d&#299;pa as one region within it rather than a separate land.</p></div>
+            <div class="col"><span>Evidence</span><p>Over 1,000 pre-Christian Br&#257;hm&#299; inscriptions from <em>Inscriptions of Ceylon, Vol. I</em>, cross-checked against the P&#257;li Canon and its commentaries, then tested against the <em>Mah&#257;parinibb&#257;na Sutta</em>'s travel itinerary using a recalibrated yojana of roughly 4.5 miles.</p></div>
+            <div class="col disc-correspondences">
+              <span>Named-individual correspondences</span>
+              <div class="corr-row"><span class="corr-ic">IC 205, Yangala</span><span class="corr-text"><em>Bama&#7751;a Kosika-puta Vijitasenasa le&#7751;e</em> &mdash; "the cave of Vijitasena, son of the Br&#257;hma&#7751;a Kosika." <em>Kosika</em>/<em>Kosiya</em> is recorded in the DPPN (pp. 699&ndash;700) as a brahmin clan name, associated among others with Maccharikosiya of Sakkhara near R&#257;jagaha.</span></div>
+              <div class="corr-row"><span class="corr-ic">IC 98(12), Ruvanv&auml;lis&auml;ya</span><span class="corr-text">A partly-reconstructed "K[o]&#347;ike" &mdash; a further possible occurrence of the same name.</span></div>
+              <div class="corr-row"><span class="corr-ic">IC 98(11), Ruvanv&auml;lis&auml;ya</span><span class="corr-text"><em>Gapati Citaha</em> &mdash; a householder named Citta, matching the name-title combination of Citta Gahapati, the Buddha's foremost lay teacher of the Dhamma (DPPN I, 865&ndash;866).</span></div>
+              <p class="corr-caveat">Individually inconclusive &mdash; neither name was unique to one person &mdash; but treated as part of a cumulative dossier tested alongside chronology, place-names, routes, and archaeology. An equivalent survey of Indian inscriptions and Sanskrit/Prakrit name-variants has not yet been completed for comparison.</p>
+            </div>
+            <figure class="col disc-figure">
+              <img src="media/jambudipa-map.png" alt="Composite cartographic synthesis of the reconstructed Jambudipa">
+              <figcaption>Fig. 3 &mdash; Composite cartographic synthesis of the reconstructed Jambud&#299;pa</figcaption>
+            </figure>
+          </div></div>
+        </div>
+        <div class="disc-item">
+          <button class="disc-head"><h3>Recalibration of the Ancient Yojana</h3><span class="disc-plus">+</span></button>
+          <div class="disc-body"><div class="disc-body-inner">
+            <div class="col"><span>Summary</span><p>The ancient Yojana's actual scale has long been debated. Early Indian sources define it as a dhanu-based linear unit &mdash; 4,000 dhanu of 6 feet each &mdash; yielding roughly 4.5 miles, not the inflated 12-mile value later medieval lexicons introduced and British-era translators uncritically adopted.</p></div>
+            <div class="col"><span>Evidence</span><p>Arthaśāstra and Lalitavistara definitions of the dhanu-based yojana; the 12th-century <em>Abhidh&#257;nappad&#299;pik&#257;</em>'s inflated 12-mile figure identified as the source of the distortion; independent corroboration from A. L. Basham and from Kher (1965), both confirming an early yojana of c. 4.5 miles.</p></div>
+          </div></div>
+        </div>
+        <div class="disc-item" id="disc-taprobane">
+          <button class="disc-head"><h3>Taprobane, Remapped</h3><span class="disc-plus">+</span></button>
+          <div class="disc-body"><div class="disc-body-inner disc-body-inner--wide">
+            <div class="col"><span>Summary</span><p>Greek sources describe Taprobane as a landmass &ldquo;separated from the mainland by a river&rdquo; &mdash; a detail present in Megasthenes and Arrian but dropped from some twentieth-century translations. Read against the D&#299;pava&#7747;sa's own dimensions for Lank&#257;d&#299;pa/Tambapa&#7751;&#7751;i (32 &times; 18 yojanas) and Fa-Hien's dimensions for the country of Sinhala (50 &times; 30 yojanas), and converted using the recalibrated 4.5-mile yojana, Taprobane resolves not as the whole island but as one coherent region within it.</p></div>
+            <div class="col"><span>Evidence</span><p>Megasthenes' <em>Indica</em> and Arrian, compared against J. W. McCrindle's 19th-century translation and later facsimile editions; D&#299;pava&#7747;sa Chapter XVII; Fa-Hien's account of Sinhala; and a cartographic correlation in which Lank&#257;d&#299;pa's 32 &times; 18-yojana dimensions align almost exactly with an 8 &times; 3 block of one-inch-to-one-mile Survey of Ceylon sheets.</p></div>
+            <figure class="col disc-figure">
+              <img src="media/taprobane-poster.png" alt="Poster: What the Greeks Knew, and the 19th Century Forgot — Re-mapping Taprobane within Sri Lanka">
+              <figcaption>Poster #311 &mdash; European Association of Archaeologists (forthcoming)</figcaption>
+            </figure>
+          </div></div>
+        </div>
+        <div class="disc-item" id="disc-lankadipa">
+          <button class="disc-head"><h3>Lank&#257;d&#299;pa, Properly Located <span class="core-badge">Core paper</span></h3><span class="disc-plus">+</span></button>
+          <div class="disc-body"><div class="disc-body-inner">
+            <div class="col"><span>Summary</span><p>Lank&#257;deepa was not a name for the whole island, but for a specific south-eastern region within it. Applying the recalibrated yojana to the D&#299;pava&#7747;sa's own dimensions for Lank&#257;deepa/Tambapa&#7751;&#7751;i (32 &times; 18 yojanas = 144 &times; 81 miles) and overlaying that onto the one-inch Survey of Ceylon map series produces a precise match &mdash; three sheets wide, eight sheets tall &mdash; with the same south-eastern quarter of the island where Vijaya's chronicled settlement, the Buddha's meditation sites, and the Mah&#257;vih&#257;ra/Mah&#257;th&#363;pa foundation tradition all sit. This is the paper's central finding: Lank&#257;deepa as one region within the wider country of Sinhala, not a synonym for it &mdash; a reading that tallies directly with the Mah&#257;va&#7747;sa and D&#299;pava&#7747;sa's own narration.</p></div>
+            <div class="col"><span>Evidence</span><p>D&#299;pava&#7747;sa Chapter IX (Vijaya's southern settlement at Tambapa&#7751;&#7751;i) and Chapter XVII (Lank&#257;deepa's dimensions); pre-Christian Br&#257;hm&#299; inscriptions from Bovattegala, Kottadamuhela, Mandagala, Hennanegala, and Mottayakallu recording five-generation royal genealogies; archaeological evidence of urbanisation and trade at Tissamaharama and Akurugoda; one-inch-to-one-mile Survey of Ceylon topographic sheets; and, following peer review, Vitharana's <em>Sri Lanka &ndash; The Geographical Vision</em> (1999) and Pieris's <em>Sinhalese Social Organization: The Kandyan Period</em> (1956).</p></div>
+            <p class="disc-status">Submitted to the Royal Asiatic Society of Sri Lanka, 15 October 2024 &middot; peer-reviewed and revised at the reviewer's request &middot; forthcoming in the RASSL Journal.</p>
+          </div></div>
+        </div>
+        <div class="disc-item" id="disc-miti-riyana">
+          <button class="disc-head"><h3>Forgotten Miti Riyana</h3><span class="disc-plus">+</span></button>
+          <div class="disc-body"><div class="disc-body-inner">
+            <div class="col"><span>Summary</span><p>The Miti Riyana, a lesser-known traditional unit, is restored to view through its meaning, application, and relationship to other ancient measurement systems.</p></div>
+            <div class="col"><span>Evidence</span><p>Ancient texts, inscriptions, traditional knowledge, historical measurements, and comparison with known architectural and geographical dimensions.</p></div>
+          </div></div>
+        </div>
+        <div class="disc-item">
+          <button class="disc-head"><h3>Ratnapala: The Forgotten Genius</h3><span class="disc-plus">+</span></button>
+          <div class="disc-body"><div class="disc-body-inner">
+            <div class="col"><span>Summary</span><p>James Prinsep's celebrated 1837 decipherment of the Br&#257;hm&#299; script had a quiet collaborator: Ratnapala, an ex-Ceylonese Buddhist monk and Pali scholar who helped Prinsep translate key inscriptions, including the Delhi pillar's regnal-year sentence, yet was credited only in passing across the published record.</p></div>
+            <div class="col"><span>Evidence</span><p>Prinsep's letters to Sir Alexander Cunningham, published in the <em>Archaeological Survey of India</em> (1862); the <em>Journal of the Asiatic Society of Bengal</em>, Vol. VI (1837); H. Walter's 1834 paper crediting Ratnapala's Pali-Burmese translation work (<em>Journal of the Asiatic Society</em>, No. 29, May 1834, pp. 209 &amp; 214); and Ratnapala's own biography &mdash; ordained under the Amarapura Nik&#257;ya, service in the first Anglo-Burmese War, and a later life as a Calcutta businessman.</p></div>
+            <p class="disc-status">Published as an Editor's Pick in <em>The Journal of Archaeology &amp; Heritage Studies</em> (JAHS), Rajarata University of Sri Lanka, 8(II) 2021: 18&ndash;24.</p>
+          </div></div>
+        </div>
+        <div class="disc-item">
+          <button class="disc-head"><h3>Early Buddhist Geography</h3><span class="disc-plus">+</span></button>
+          <div class="disc-body"><div class="disc-body-inner">
+            <div class="col"><span>Summary</span><p>Applying Renfrew and Bahn's processual and post-processual paradigms, inscriptional clusters &mdash; at Mihintale, Vess&#257;g&#298;riya, and beyond &mdash; align with canonical <em>janapadas</em> such as Vajji and Magadha, revealing interconnected monastic networks rather than isolated sacred sites.</p></div>
+            <div class="col"><span>Evidence</span><p>1,234 pre-Christian Br&#257;hm&#299; inscriptions across 269 sites, cross-referenced with the <em>Therag&#257;th&#257;</em> and <em>Ther&#299;g&#257;th&#257; A&#7789;&#7789;hakath&#257;</em>, and mapped against Elahera and Minipe canal corridors.</p></div>
+            <p class="disc-status"><strong>&#256;nanda Thera as anchor:</strong> as the Buddha's attendant, his recorded dwellings anchor the lived landscape. His name appears in pre-Christian Br&#257;hm&#299; inscriptions at Dambulla (IC 845, a <em>saddhivih&#257;riya</em> lineage record) and Brahmanayagama, Horowpothana (IC 155) &mdash; two established monastic centres, not isolated shrines, corresponding spatially to R&#257;jagaha and Ves&#257;l&#299;.</p>
+            <figure class="disc-figure disc-figure--wide">
+              <img src="media/ananda-inscription-3d.jpg" alt="Photogrammetric 3D capture of the Anada Thera Brahmi inscription at Dambulla">
+              <figcaption>The <em>Anada therasa sadivihariyana lene</em> inscription at Dambulla, captured by photogrammetric 3D imaging &mdash; a clearer record than traditional estampage.</figcaption>
+            </figure>
+          </div></div>
+        </div>
+        <div class="disc-item">
+          <button class="disc-head"><h3>Between Jambud&#299;pa and Lank&#257;d&#299;pa <span class="hypothesis-badge">Working hypothesis</span></h3><span class="disc-plus">+</span></button>
+          <div class="disc-body"><div class="disc-body-inner">
+            <div class="col"><span>Summary</span><p>The <em>Milindapa&#241;ha</em> traces N&#257;gasena's training in detail: ordained and instructed by Rohana, brought into Assagutta's community at the Vattaniya hermitage, then sent onward &mdash; "Go, N&#257;gasena, to P&#257;\u1e6daliputta&hellip; in the Asoka Park dwells the venerable Dhammarakkhita" &mdash; to study under Dhammarakkhita, before travelling on to S&#257;gala for the dialogue with King Milinda. Every name in that training chain &mdash; Assagutta, Dhammarakkhita, So\u1e47uttara, N&#257;gasena &mdash; occurs in Sri Lanka's early-Br&#257;hm&#299; cave inscriptions, alongside Nigrodha, Sumana, and Mah&#257;varu\u1e47a elsewhere in the corpus, and an &#257;cariya P&#257;r&#257;sariya at Sithulpavva, matching a teacher of that name associated in Buddhist literature with Kajangala. None of these were unique personal names, so identity cannot be assumed from a name alone &mdash; but their combined appearance places Sri Lanka's early monastic society within the same world of names, teachers, and institutions as the <em>Milindapa&#241;ha</em> narrative.</p></div>
+            <div class="col"><span>Evidence</span><p>Assagutta (IC 3), Dhammarakkhita (IC 76), So\u1e47uttara (IC 83), N&#257;gasena (IC 451, 602, 609), and &#257;cariya P&#257;r&#257;sariya (IC 604) at Sithulpavva; Nigrodha, Sumana, and Mah&#257;varu\u1e47a recorded elsewhere in the early-Br&#257;hm&#299; corpus; and, as an independent benchmark for confirmed overseas movement, the Rajagala inscription commemorating theras Mahinda and I\u1e6d\u1e6dhiya, which explicitly records their arrival "from across the sea" &mdash; the strongest case in the corpus, combining name, status, origin, and memorial context.</p></div>
+            <p class="disc-status">A shared name is suggestive, not proof: the inscriptions do not supply the father-teacher-pupil-monastery relationships needed to confirm a single individual's identity. What they support is a connected Buddhist cultural zone in which the same monastic names, teachers, and patterns of mobility circulated between Jambud&#299;pa and Lank&#257;d&#299;pa &mdash; not, at this stage, a claim that any specific inscribed N&#257;gasena is the N&#257;gasena who debated King Milinda.</p>
+          </div></div>
+        </div>
+        <div class="disc-item" id="disc-five-rivers">
+          <button class="disc-head"><h3>The Five Rivers of Jambud&#299;pa <span class="hypothesis-badge">Working hypothesis</span></h3><span class="disc-plus">+</span></button>
+          <div class="disc-body"><div class="disc-body-inner">
+            <div class="col"><span>Summary</span><p>The <em>Selasuttava&#7751;&#7751;an&#257;</em> (<em>Paramatthajotik&#257; II</em>, pp. 437&ndash;440) traces the mythic path of the waters of Lake Anotatta as they circle the lake, fall as a cascade, strike a rock named <strong>Tiyaggala</strong>, pool into <em>Tiyaggalapokkhara&#7751;&#299;</em>, run on as <em>Bahalaga&#7749;g&#257;</em> and <em>Ummaggaga&#7749;g&#257;</em>, and finally split into five: Ga&#7749;g&#257;, Yamun&#257;, Aciravat&#299;, Sarabh&#363;, and Mah&#299; (locally <em>Mah&#257;mah&#299;ga&#7749;g&#257;</em>). Sri Lanka's one-inch topographic maps offer possible geographical parallels, most notably a linked system in which the Kalu Ganga's continuation joins the Amban Ganga, which meets the Mahaveli Ganga in the Polonnaruwa District. A distinctive loop in the Amban Ganga is proposed as the <em>N&#257;di Chakra</em> ("river circuit") in which tradition places King Kosala's palace and Jetavan&#257;r&#257;ma.</p></div>
+            <div class="col"><span>Evidence</span><p>A specific textual anomaly motivates re-examining this passage: <strong>Tiyaggala</strong>, the rock and pool named at the centre of the river's course, does not correspond to any known toponym in the Himalayan region the text nominally describes, but reads as a Sinhala place-name. The Ha&#7789;h&#7789;otuwa Amuna, which diverts water from the Amban Ganga into a channel running roughly parallel to it, may have doubled as a navigable canal rather than serving irrigation alone. Two archaeological sites marked on the one-inch map fall within or near the proposed <em>N&#257;di Chakra</em> and may offer supporting evidence, though their dating and character still need direct examination.</p></div>
+            <p class="disc-status">Matching ancient river and place names to present-day courses is inherently conjectural, and the Tiyaggala identification in particular is an initial linguistic observation, not a settled reading. This is presented as a preliminary geographical model &mdash; open to testing against Pali commentarial texts, place-name evidence, archaeology, satellite imagery, and hydrological data.</p>
+          </div></div>
+        </div>
+        <div class="disc-item">
+          <button class="disc-head"><h3>Ancient Canal Navigation</h3><span class="disc-plus">+</span></button>
+          <div class="disc-body"><div class="disc-body-inner">
+            <div class="col"><span>Summary</span><p>Testing whether ancient irrigation canals also served as navigational networks, moving people and goods, not only water.</p></div>
+            <div class="col"><span>Evidence</span><p>Historical texts, archaeological remains, topographical maps, hydrological analysis, and field observation of canal alignments and gradients.</p></div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- INTERACTIVE: YOJANA CONVERTER -->
+  <section id="try-it">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">See it for yourself</div>
+          <h2 class="h">The measurement that changes everything</h2>
+        </div>
+        <p class="section-note">Ancient texts give distances in <em>yojana</em>. The value you assign decides whether the geography fits Sri Lanka or sprawls across a continent. Try both.</p>
+      </div>
+
+      <div class="converter">
+        <div class="conv-controls">
+          <div class="conv-toggle" role="group" aria-label="Choose a yojana value">
+            <button type="button" class="ct-btn active" data-miles="4.5">Recalibrated &middot; 4.5 mi</button>
+            <button type="button" class="ct-btn" data-miles="12">Colonial &middot; 12 mi</button>
+          </div>
+          <div class="conv-slider-row">
+            <label for="yoj">Distance in the text</label>
+            <input type="range" id="yoj" min="1" max="80" value="32" step="1">
+            <span id="yoj-out">32 yojana</span>
+          </div>
+        </div>
+
+        <div class="conv-readout">
+          <div class="conv-result">
+            <span class="conv-num" id="conv-miles">144</span>
+            <span class="conv-unit">miles</span>
+          </div>
+          <div class="conv-verdict" id="conv-verdict"></div>
+        </div>
+
+        <div class="conv-scale">
+          <div class="scale-row">
+            <span class="scale-label">Sri Lanka, north to south</span>
+            <div class="scale-track"><div class="scale-ref" style="width:100%"></div><div class="scale-bar" id="scale-bar"></div></div>
+            <span class="scale-cap mono">~270 mi</span>
+          </div>
+          <p class="conv-note" id="conv-note"></p>
+        </div>
+      </div>
+
+      <div class="riyana-block">
+        <div class="riyana-head">
+          <h3 class="riyana-title">Now do the same with the <em>riyana</em></h3>
+          <p class="riyana-sub">Three canonical descriptions, read under each standard. Switch units to see which one holds up.</p>
+        </div>
+        <div class="comparator">
+          <div class="comparator-head">
+            <div class="ry-toggle" role="group" aria-label="Choose a riyana value">
+              <button type="button" class="ry-btn active" data-unit="wadu">Wadu Riyana &middot; 18 in</button>
+              <button type="button" class="ry-btn" data-unit="miti">Miti Riyana &middot; 4 in</button>
+            </div>
+            <div class="ry-readout mono">1 riyana currently read as <span id="ry-unit">18 inches</span></div>
+          </div>
+          <div class="ry-grid">
+            <div class="ry-case">
+              <h4>The Buddha&rsquo;s height</h4>
+              <div class="ry-src">Madhuratthavilasini &middot; 18 riyanas</div>
+              <div class="ry-num mono">27 ft</div>
+              <div class="ry-track"><div class="ry-fill over" style="width:100%"></div></div>
+              <div class="ry-verdict">A person nearly three storeys tall.</div>
+            </div>
+            <div class="ry-case">
+              <h4>The golden bowl</h4>
+              <div class="ry-src">Mahavamsa &amp; Sinhala Bodhivamsa &middot; 9 / 5 / 3 riyanas</div>
+              <div class="ry-num mono">13.5 ft</div>
+              <div class="ry-track"><div class="ry-fill over" style="width:100%"></div></div>
+              <div class="ry-verdict">A vessel too vast to carry a Bodhi branch.</div>
+            </div>
+            <div class="ry-case">
+              <h4>The sandalwood pyre</h4>
+              <div class="ry-src">Dathuvamsa &middot; 21 riyanas</div>
+              <div class="ry-num mono">31.5 ft</div>
+              <div class="ry-track"><div class="ry-fill over" style="width:100%"></div></div>
+              <div class="ry-verdict">Taller than a ten-storey structure.</div>
+            </div>
+          </div>
+          <p class="comparator-foot">Figures update from the same riyana counts given in the source texts &mdash; only the inch value assigned to one riyana changes.</p>
+        </div>
+      </div>
+
+      <div class="fourinch-block">
+        <div class="fourinch-head">
+          <h3 class="riyana-title">Where the four-inch reading holds</h3>
+          <p class="riyana-sub">The same three passages, and one contemporary caution, set out source by source.</p>
+        </div>
+        <div class="ev-stack">
+          <div class="ev-row">
+            <div class="ev-who">Madhuratthavilasini</div>
+            <p>Records the Buddha&rsquo;s height as eighteen riyanas. Read at 18 in per riyana this yields an impossible 27 ft; read at 4 in, a credible six feet.</p>
+          </div>
+          <div class="ev-row">
+            <div class="ev-who">Mahavamsa / Bodhivamsa</div>
+            <p>Describe the golden bowl carrying the Bodhi branch as nine riyanas in circumference, five in height, three in diameter. At four inches per riyana it emerges as 36 in around, 20 in high, 12 in wide &mdash; sized for ritual use.</p>
+          </div>
+          <div class="ev-row">
+            <div class="ev-who">Dathuvamsa</div>
+            <p>Describes a sandalwood pyre of twenty-one riyanas: 31.5 ft under the inflated system, a realistic seven feet under the four-inch measure.</p>
+          </div>
+          <div class="ev-row">
+            <div class="ev-who">T.W. Rhys Davids</div>
+            <p>Observed that the units codified in the <em>Abhidhanappadipika</em> were largely imaginary constructs, never in practical use &mdash; a caution colonial-era historians did not heed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- DISTANCE TEST -->
+  <section id="distance-test">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">A worked test</div>
+          <h2 class="h">When the text and the map agree</h2>
+        </div>
+        <p class="section-note">The converter above is a tool. Here is one real case where the recalibrated yojana turns a canonical distance into a measurement you can check on a survey map.</p>
+      </div>
+
+      <div class="dtest">
+        <div class="dtest-figure">
+          <img src="media/elahera-distance-map.jpg" alt="One-inch survey map with a tape measure showing 13.5 inches from the Brahmanayagama area to the Kantalai area">
+          <figcaption>One-inch-to-one-mile survey map: the measured distance from the Brahmanayagama (Ves&#257;l&#299;) area southeast toward Kantalai reads &asymp; 13.5 inches &mdash; that is, 13.5 miles.</figcaption>
+        </div>
+        <div class="dtest-steps">
+          <div class="dstep">
+            <span class="dstep-k">Canonical source</span>
+            <p>Balangoda &#256;nanda Maitreya's <em>Buddha Charitaya</em> records the distance from the Ga&#7749;g&#257; to Ves&#257;l&#299; as <strong>3 yojana</strong>, and places R&#257;jagaha 8 yojana south of Ves&#257;l&#299;.</p>
+          </div>
+          <div class="dstep">
+            <span class="dstep-k">Recalibrated conversion</span>
+            <p>3 yojana &times; 4.5 miles = <strong>13.5 miles</strong>.</p>
+          </div>
+          <div class="dstep">
+            <span class="dstep-k">Map measurement</span>
+            <p>On the one-inch survey map, the distance from the Brahmanayagama area along the southern waterway measures <strong>&asymp; 13.5 miles</strong> &mdash; the two figures converge.</p>
+          </div>
+          <div class="dstep dstep-note">
+            <span class="dstep-k">What this shows, and what it doesn't</span>
+            <p>The distance match is a genuine, checkable result: a &ldquo;Ga&#7749;g&#257;&rdquo; three recalibrated-yojana from Ves&#257;l&#299; lands exactly where the map places a major waterway. <span class="dstep-soft">That the waterway is specifically the El&#257;hera Yodha Ela &mdash; the only canal on the southern route from Brahmanayagama, running on to Trincomalee &mdash; remains a proposal still being tested against further cartographic and hydrological evidence.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CHAPTER BREAK -->
+  <section class="chapter-break" style="background-image:url('media/landscape.jpeg')">
+    <div class="wrap chapter-copy">
+      <p class="chapter-quote">&ldquo;Rivers, reservoirs, and canal systems were not just water infrastructure &mdash; they were the movement corridors of an interconnected monastic landscape.&rdquo;</p>
+      <span class="chapter-cite">Beyond Conventional Narratives &middot; Archaeology Symposium 2026</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- METHODOLOGY -->
+  <section id="methodology">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Methodology</div>
+          <h2 class="h">A framework of converging evidence</h2>
+        </div>
+        <p class="section-note">No single source tells the whole story. Each is tested independently, then cross-validated against the rest.</p>
+      </div>
+      <div class="method-wrap">
+        <div class="method-copy">
+          <p>Understanding the past requires more than relying on a single source of evidence. Historical texts, while invaluable, represent only one part of the story. This research integrates <strong>archaeology, epigraphy, historical cartography, hydrology, ancient measurements, landscape analysis, and textual studies</strong> &mdash; each examined independently before being compared and cross-validated.</p>
+          <p>Inscriptions provide names, locations, and social information. Ancient literature preserves tradition and memory. Maps and landscapes reveal forgotten settlements and waterways. Scientific reconstruction of measurements offers a further, independent test. Where these converge, a pattern that no single source could show on its own comes into view.</p>
+        </div>
+        <svg viewBox="0 0 380 340" role="img" aria-label="Diagram of seven evidence streams converging on a central point">
+          <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#c9bfa9">
+            <text x="10" y="20">Archaeology</text>
+            <text x="270" y="20">Epigraphy</text>
+            <text x="4" y="90">Ancient literature</text>
+            <text x="278" y="90">Cartography</text>
+            <text x="18" y="270">Hydrology</text>
+            <text x="255" y="270">Metrology</text>
+            <text x="135" y="320">Landscape archaeology</text>
+          </g>
+          <g stroke="#5f7a63" stroke-width="1" opacity="0.7">
+            <line x1="60" y1="24" x2="190" y2="170"/>
+            <line x1="300" y1="24" x2="190" y2="170"/>
+            <line x1="60" y1="95" x2="190" y2="170"/>
+            <line x1="310" y1="95" x2="190" y2="170"/>
+            <line x1="65" y1="262" x2="190" y2="170"/>
+            <line x1="290" y1="262" x2="190" y2="170"/>
+            <line x1="190" y1="308" x2="190" y2="170"/>
+          </g>
+          <circle cx="190" cy="170" r="30" fill="none" stroke="#b6905a" stroke-width="1.4"/>
+          <circle cx="190" cy="170" r="4" fill="#d3ab74"/>
+          <text x="190" y="150" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="9" fill="#d3ab74">CONVERGENCE</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- INTERACTIVE: THREE HORIZONS -->
+  <section id="horizons" class="band-light">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">The pattern</div>
+          <h2 class="h">Names that fall into three eras, not at random</h2>
+        </div>
+        <p class="section-note">Plotted onto the map, the correlated inscriptions don't scatter &mdash; they cluster into three distinct chronological horizons. Choose one to see who appears.</p>
+      </div>
+
+      <div class="horizons">
+        <div class="hz-tabs" role="group" aria-label="Choose a chronological horizon">
+          <button type="button" class="hz-tab active" data-hz="buddha">
+            <span class="hz-tab-era">Buddha period</span>
+            <span class="hz-tab-date">5th&ndash;6th century BC</span>
+          </button>
+          <button type="button" class="hz-tab" data-hz="asokan">
+            <span class="hz-tab-era">Asokan period</span>
+            <span class="hz-tab-date">3rd century BC</span>
+          </button>
+          <button type="button" class="hz-tab" data-hz="mahathupa">
+            <span class="hz-tab-era">Mah&#257;th&#363;pa foundation</span>
+            <span class="hz-tab-date">Dutugemunu, 2nd century BC</span>
+          </button>
+        </div>
+
+        <div class="hz-intro" id="hz-intro"></div>
+
+        <div class="hz-grid" id="hz-grid"></div>
+
+        <p class="hz-foot">Each proposed correlation was first tested cartographically through spatial mapping before any chronological interpretation. Inscription numbers (IC) and <em>Dictionary of P&#257;li Proper Names</em> (DPPN) references are given where recorded.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- INTERACTIVE: PLACE IDENTIFICATIONS -->
+  <section id="places">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Placing the names</div>
+          <h2 class="h">Where the canonical places may actually sit</h2>
+        </div>
+        <p class="section-note">Each identification below pairs an ancient name from the texts with a proposed Sri Lankan location, and the evidence behind it. These are testable reconstructions, not settled facts &mdash; choose one to see the case.</p>
+      </div>
+
+      <div class="places">
+        <div class="pl-list" id="pl-list" role="tablist" aria-label="Ancient places"></div>
+        <div class="pl-detail" id="pl-detail"></div>
+      </div>
+      <p class="pl-foot">Identifications rest on converging lines &mdash; canonical descriptions, pre-Christian Br&#257;hm&#299; inscriptions, one-inch survey-map geography, and the recalibrated yojana. Each is offered for testing and refutation, in line with the project's stated principles.</p>
+
+      <div class="map-figures">
+        <figure class="mapfig">
+          <img src="media/brahmanawewa-map.jpg" alt="One-inch survey map extract of the Brahmanawewa and Horowpotana area">
+          <figcaption><strong>Brahmanawewa, Horowpotana.</strong> The Survey of Ceylon sheet itself marks an &ldquo;Ancient Site,&rdquo; a stone bridge, and a causeway here &mdash; the government's own map recording early remains at the point proposed for V&#257;lik&#257;r&#257;ma in the Ves&#257;l&#299; zone.</figcaption>
+        </figure>
+        <figure class="mapfig">
+          <img src="media/horowpotana-old-map.jpg" alt="Older monochrome survey map of the Horowpotana area showing ruins">
+          <figcaption><strong>Horowpotana (earlier survey).</strong> The older sheet records <em>Brahakamana Wewa</em> and marks &ldquo;Ruins&rdquo; near Kudahelambewa &mdash; independent cartographic corroboration of monastic remains in the same landscape.</figcaption>
+        </figure>
+        <figure class="mapfig mapfig--wide">
+          <img src="media/yodha-ela-kantalai.jpg" alt="One-inch survey map of the Kantalai Tank area showing the Yodha Ela channel">
+          <figcaption><strong>Kantalai Tank and the Yodha Ela.</strong> A major ancient canal traverses this landscape toward Trincomalee. Its course and antiquity are documented in R.L. Brohier's <em>Ancient Irrigation Works in Ceylon</em> and the Tamankaduwa&ndash;El&#257;hera&ndash;Minneriya studies, and in Anuradha Seneviratna's <em>The Springs of Sinhala Civilization</em>. The canal's identification with the canonical &ldquo;Ga&#7749;g&#257;&rdquo; is a separate proposal of this project, still under test.</figcaption>
+        </figure>
+        <figure class="mapfig mapfig--wide">
+          <img src="media/kapilavatthu-anoma-distance-calibration.png" alt="Slide showing the Lalitavistara's 7-yojana distance from Kapilavastu to the Anomā River, converted to 31.5 miles and verified by direct measurement on the one-inch survey map from Katugastota to the Mahaveli River crossing at Buddhankotte, with Ambagahapelessa (proposed Anupiya-ambavana) marked near the Kiwulegedara ruins">
+          <figcaption><strong>Distance calibration: Kapilavatthu to the Anomā.</strong> The Lalitavistara's stated 7-yojana journey (31.5 miles at the recalibrated yojana) is checked directly against the one-inch map: a straight-line measurement from Katugastota to the Mahaveli crossing at Buddhankotte comes out at the same 31.5 miles, with Ambagahapelessa &mdash; the proposed Anupiya-ambavana &mdash; marked nearby.</figcaption>
+        </figure>
+        <figure class="mapfig mapfig--wide">
+          <img src="media/vesali-vajji-case-study-2.png" alt="Map of the Vavuniya–Padaviya–Medawachchiya–Horowpothana–Anuradhapura–Gal Oya survey sheets marking major inscriptional clusters, with a table of named-individual correlations: IC 332 Rohiṇī Sāmaṇiyā, IC 346 a Vesālī-puta donor, IC 328 and IC 166 Nāthika/Nādika references, and IC 155 Ānanda Thera's Vālikārāma">
+          <figcaption><strong>Reconstructing the Ves\u0101l\u012b\u2013Vajji landscape.</strong> After all 1,234 inscriptions were plotted independently of the texts, a dense cluster emerged across Vavuniya, Medawachchiya, Horowpothana, and Gal Oya. Only then was it checked against the canon: IC 332 (Rohi\u1e47\u012b S\u0101ma\u1e47iy\u0101), IC 346 (a Ves\u0101l\u012b-born donor), IC 328 and IC 166 (N\u0101thika/N\u0101dika), and IC 155 (\u0100nanda Thera's V\u0101lik\u0101r\u0101ma) all fall within it.</figcaption>
+        </figure>
+        <figure class="mapfig mapfig--wide">
+          <img src="media/vesali-case-study-3-metrology.png" alt="Slide showing the Mahāparinibbāna Sutta's 3-yojana Gaṅgā-to-Vesālī distance converted to 13.5 miles and matched by direct measurement on the one-inch survey map, with the Elāhera Yodha Ela proposed as the canonical navigable waterway">
+          <figcaption><strong>Metrological validation of the Ves\u0101l\u012b reconstruction.</strong> DN 16 gives the Ga\u1e45g\u0101\u2013Ves\u0101l\u012b distance as 3 yojana \u2014 13.5 miles at the recalibrated yojana \u2014 and the same 13.5 miles is measured directly on the survey map. The canon's navigable waterway is proposed as the El\u0101hera Yodha Ela, an engineered low-gradient canal consistent with boat travel.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- EVIDENCE -->
+  <section id="evidence" class="band-light">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Evidence</div>
+          <h2 class="h">How the findings were reached</h2>
+        </div>
+        <p class="section-note">Discoveries explain what was found. This is how each was tested.</p>
+      </div>
+      <div class="prog-grid">
+        <div class="prog-card" tabindex="0">
+          <svg class="prog-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 8h1M8 12h1M8 16h1M12 8h4M12 12h4M12 16h2"/></svg>
+          <h3>Epigraphy</h3>
+          <div class="prog-tags">Readings &middot; transliteration &middot; translation</div>
+          <div class="prog-desc">Inscription numbers, donor and monastic names, findspots, and dates, cross-referenced against canonical figures.</div>
+        </div>
+        <div class="prog-card" tabindex="0">
+          <svg class="prog-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg>
+          <h3>Cartography</h3>
+          <div class="prog-tags">One-inch survey sheets &middot; overlays</div>
+          <div class="prog-desc">Historical Survey of Ceylon maps overlaid with modern geography to plot routes, distances, and boundaries.</div>
+        </div>
+        <div class="prog-card" tabindex="0">
+          <svg class="prog-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 4h9l3 3v13H6z"/><path d="M10 9h5M10 13h5M10 17h3"/></svg>
+          <h3>Canonical Literature</h3>
+          <div class="prog-tags">Tripi&#7789;aka &middot; A&#7789;&#7789;hakath&#257; &middot; chronicles</div>
+          <div class="prog-desc">Geographical descriptions, routes, and distances drawn from the Canon, its commentaries, and the Mah&#257;va&#7747;sa/D&#299;pava&#7747;sa.</div>
+        </div>
+        <div class="prog-card" tabindex="0">
+          <svg class="prog-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>
+          <h3>Metrology</h3>
+          <div class="prog-tags">Yojana &middot; Riyana &middot; A&#7749;gula &middot; Vidatthi</div>
+          <div class="prog-desc">Every unit's textual definition, proposed value, historical variation, and a practical geographical test.</div>
+        </div>
+        <div class="prog-card" tabindex="0">
+          <svg class="prog-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 18c3-6 6 3 9-3s6 3 9-3"/><path d="M3 12c3-6 6 3 9-3s6 3 9-3"/></svg>
+          <h3>Hydrology</h3>
+          <div class="prog-tags">Rivers &middot; canals &middot; tanks &middot; ports</div>
+          <div class="prog-desc">Waterways read as functional movement corridors linking settlements, monasteries, and ancient ports.</div>
+        </div>
+        <div class="prog-card" tabindex="0">
+          <svg class="prog-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 21h16M6 21V9l6-5 6 5v12M10 21v-6h4v6"/></svg>
+          <h3>Archaeology &amp; Settlement</h3>
+          <div class="prog-tags">Excavations &middot; st&#363;pas &middot; caves &middot; roads</div>
+          <div class="prog-desc">Settlement plans, monastic complexes, and securely dated material remains anchoring the textual record in place.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SOURCE SPOTLIGHT: KADAIM POTA -->
+  <section id="sources">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Primary sources</div>
+          <h2 class="h">Reading the island's own registers</h2>
+        </div>
+        <p class="section-note">Long before colonial surveys, Sri Lanka kept its own boundary-books. These ola-leaf registers are being read again as geographical evidence.</p>
+      </div>
+
+      <div class="source-feature">
+        <figure class="source-img">
+          <img src="2.png" alt="Cover of the 1916 printed edition of the Sirilaka Kadaim Pota">
+          <figcaption>Sirilaka Kadaim Pota, printed edition of 1916 (B.E. 2460), ed. K.M.S. de Silva</figcaption>
+        </figure>
+        <div class="source-body">
+          <p class="source-lead">The <em>Kadaim Pota</em> &mdash; literally the &ldquo;book of boundaries&rdquo; &mdash; is a Sinhala register that divides the entire island into named <em>rata</em> (districts) grouped under the three great divisions of <strong>Ruhunu, Pihiti, and Maya</strong>. Compiled from older palm-leaf sources, it preserves a geography of Sri Lanka told from the inside, in its own place-names and its own categories.</p>
+          <p>Alongside it, the <em>Lekam Miti</em> registers record the island's administrative machinery: the writing-offices, land surveys, and revenue institutions of the ancient kingdoms. Together they document something the standard histories overlook &mdash; that early Sri Lanka ran a literate, record-keeping state with named scribal titles such as the <em>Jayamaha Lenao</em> granted to Bodhigupta, the <em>Mahalekhaka</em>, and, under Parakramabahu I, the <em>Antarangadhura</em> office.</p>
+          <div class="source-callout">
+            <span class="sc-label">Why it matters</span>
+            <p>The Sinhala term <em>lenavo</em> (writers/scribes) and the office of &ldquo;Maha Lekha&rdquo; have a striking parallel in the Asokan edicts. The connection between Sri Lanka's scribal tradition and the writing culture of Jambud&#299;pa is a live line of inquiry &mdash; one this project argues has been read in only one direction. <span class="sc-hedge">How that scribal culture moved, and which way, remains to be established from the sources rather than assumed.</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- RESEARCH PROGRAMMES -->
+  <section id="research" class="band-light">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Research</div>
+          <h2 class="h">Six research programmes</h2>
+        </div>
+        <p class="section-note">Organised by theme, not by publication date. Hover a card for a one-line summary.</p>
+      </div>
+      <div class="prog-grid">
+        <div class="prog-card" tabindex="0">
+          <svg class="prog-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 19V5a2 2 0 012-2h11l3 3v13a2 2 0 01-2 2H6a2 2 0 01-2-2z"/><path d="M8 8h8M8 12h8M8 16h5"/></svg>
+          <div class="prog-no">Programme I</div>
+          <h3>Forgotten History</h3>
+          <div class="prog-tags">James Prinsep &middot; Ratnapala</div>
+          <div class="prog-desc">Rediscovering neglected narratives, including the untold Sri Lankan contribution to deciphering Br&#257;hm&#299;.</div>
+        </div>
+        <div class="prog-card" tabindex="0">
+          <svg class="prog-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>
+          <div class="prog-no">Programme II</div>
+          <h3>Ancient Measurements</h3>
+          <div class="prog-tags">Miti Riyana &middot; Yojana</div>
+          <div class="prog-desc">Reconstructing traditional units of measurement and their practical, historical application.</div>
+        </div>
+        <div class="prog-card" tabindex="0">
+          <svg class="prog-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg>
+          <div class="prog-no">Programme III</div>
+          <h3>Reading the Landscape Again</h3>
+          <div class="prog-tags">One Inch Maps &middot; Canals &middot; Hydrology</div>
+          <div class="prog-desc">Combining historical cartography and hydrology to rediscover features long vanished from view.</div>
+        </div>
+        <div class="prog-card" tabindex="0">
+          <svg class="prog-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 4 6 4 9s-1.5 6.3-4 9c-2.5-2.7-4-6-4-9s1.5-6.3 4-9z"/></svg>
+          <div class="prog-no">Programme IV</div>
+          <h3>Early Buddhist Geography</h3>
+          <div class="prog-tags">Lank&#257;d&#299;pa &middot; N&#257;gad&#299;pa &middot; Kelaniya</div>
+          <div class="prog-desc">Locating canonical place-references &mdash; Mah&#257;g&#257;ma, Rajagaha, Magadha, P&#257;&#7789;aliputta &mdash; on the physical map.</div>
+        </div>
+        <div class="prog-card" tabindex="0">
+          <svg class="prog-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 4h9l3 3v13H6z"/><path d="M10 9h5M10 13h5M10 17h3"/></svg>
+          <div class="prog-no">Programme V</div>
+          <h3>Ancient Buddhist Literature</h3>
+          <div class="prog-tags">Tripi&#7789;aka &middot; Mah&#257;va&#7747;sa &middot; D&#299;pava&#7747;sa</div>
+          <div class="prog-desc">Cross-validating chronicles and commentaries against archaeological and geographical evidence.</div>
+        </div>
+        <div class="prog-card" tabindex="0">
+          <svg class="prog-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 8h1M8 12h1M8 16h1M12 8h4M12 12h4M12 16h2"/></svg>
+          <div class="prog-no">Programme VI</div>
+          <h3>Inscriptions</h3>
+          <div class="prog-tags">Pre-Christian Br&#257;hm&#299; &middot; Database &middot; Maps</div>
+          <div class="prog-desc">Building a structured inscription database to trace settlement, names, and movement across the island.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CHAPTER BREAK -->
+  <section class="chapter-break" style="background-image:url('media/inscription.jpg')">
+    <div class="wrap chapter-copy">
+      <p class="chapter-quote">&ldquo;Over a thousand pre-Christian Br&#257;hm&#299; inscriptions were long dismissed as too brief to matter &mdash; until mapped as a single, connected body of evidence.&rdquo;</p>
+      <span class="chapter-cite">Epigraphic Evidence for Sixth-Century BCE Literacy in Jambud&#299;pa</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- RESEARCH PRINCIPLES -->
+  <section id="principles">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Research Principles</div>
+          <h2 class="h">The rules this project holds itself to</h2>
+        </div>
+        <p class="section-note">Seven commitments that apply to every discovery on this site.</p>
+      </div>
+      <div class="principle-grid">
+        <div class="principle"><span class="pn">01</span><h4>Evidence Before Interpretation</h4><p>Every conclusion is derived from independently verifiable evidence rather than inherited tradition alone.</p></div>
+        <div class="principle"><span class="pn">02</span><h4>Convergence</h4><p>No historical identification is accepted on a single line of evidence.</p></div>
+        <div class="principle"><span class="pn">03</span><h4>Chronology</h4><p>Evidence is analysed within its historical period before comparisons are made across periods.</p></div>
+        <div class="principle"><span class="pn">04</span><h4>Reproducibility</h4><p>Sources, calculations, coordinates, and methods are presented so other researchers can repeat the analysis.</p></div>
+        <div class="principle"><span class="pn">05</span><h4>Transparency</h4><p>Uncertainties, limitations, and competing explanations are acknowledged, not smoothed over.</p></div>
+        <div class="principle"><span class="pn">06</span><h4>Scholarly Dialogue</h4><p>The goal is to contribute new evidence to academic discussion, not to replace one orthodoxy with another.</p></div>
+        <div class="principle"><span class="pn">07</span><h4>Provisional Conclusions</h4><p>Every reconstruction stays open to testing, refinement, correction, and further discovery.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PUBLICATIONS & MEDIA -->
+  <section id="publications" class="band-light">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Publications &amp; Media</div>
+          <h2 class="h">A permanent record of the work</h2>
+        </div>
+        <p class="section-note">Peer-reviewed papers alongside the talks, footage, and archive behind them.</p>
+      </div>
+      <div class="pm-grid">
+        <a class="pm-tile" href="https://drive.google.com/drive/folders/1oOwMj64BczGjDBl170e-S4-AG3a5psI5?usp=sharing" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 3h9l5 5v13H6z"/><path d="M15 3v5h5"/></svg>
+          <h4>Publications</h4><span class="count">Papers, posters, abstracts</span>
+        </a>
+        <a class="pm-tile" href="https://drive.google.com/drive/folders/1l8_uGjKPZbLglmDEtHYRaYBBLU-A52CL?usp=sharing" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3v12"/><circle cx="12" cy="18" r="3"/><path d="M8 7l4-4 4 4"/></svg>
+          <h4>Conference Presentations</h4><span class="count">RAS &middot; ICOMOS&ndash;CCF &middot; EAA</span>
+        </a>
+        <a class="pm-tile" href="https://drive.google.com/drive/folders/1RjhcikVoXUp-bNi0fn520gb9pmeEw7-f?usp=sharing" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="4" width="18" height="14" rx="1"/><path d="M10 9l5 3-5 3z"/></svg>
+          <h4>Research Videos</h4><span class="count">Short documentaries</span>
+        </a>
+        <a class="pm-tile" href="https://www.youtube.com/@EarlyBuddhistGeography" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M8 12h8M12 8v8"/></svg>
+          <h4>YouTube Channel</h4><span class="count">Playlists by theme</span>
+        </a>
+        <a class="pm-tile" href="https://drive.google.com/drive/folders/12zPeedv7GBeaEY7leoMHQxEl5wdJ63F1?usp=sharing" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/><circle cx="12" cy="8" r="4"/></svg>
+          <h4>Invited Lectures</h4><span class="count">Universities &amp; societies</span>
+        </a>
+        <a class="pm-tile" href="https://drive.google.com/drive/folders/1z4l0OoSnef63TTZU0h6t7zdfTO1QoqgG?usp=sharing" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 11a9 9 0 0118 0M3 11v7a2 2 0 002 2h1v-9H5M21 11v7a2 2 0 01-2 2h-1v-9h2"/></svg>
+          <h4>Media Interviews</h4><span class="count">Print, radio, podcasts</span>
+        </a>
+        <a class="pm-tile" href="https://drive.google.com/drive/folders/1Xs3Unf0KMzvJyI5czcqPyBbrAHZO0Ywn?usp=sharing" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="5" width="18" height="14" rx="1"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-4-4 3-3-2-6 5"/></svg>
+          <h4>Photo Gallery</h4><span class="count">Fieldwork &amp; archives</span>
+        </a>
+        <a class="pm-tile" href="https://drive.google.com/drive/folders/1tGHHEoETopq8eK6Qq2OEpXf47ZcivpLX?usp=sharing" target="_blank" rel="noopener noreferrer">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 4h16v16H4z"/><path d="M8 4v16M4 9h4"/></svg>
+          <h4>Documentary Archive</h4><span class="count">Manuscripts &amp; survey sheets</span>
+        </a>
+      </div>
+
+      <div class="presentation-list">
+        <div class="presentation-row"><span class="pdate">JAHS 8(II) 2021, published 2024</span><span class="ptitle">Ratnapala: The Forgotten Genius; The Hidden Force Behind the Decipherment of Br&#257;hmi Scripts with James Prinsep &mdash; Editor's Pick</span></div>
+        <div class="presentation-row"><span class="pdate">RASSL Journal, forthcoming</span><span class="ptitle">Historical Geography: The Significance of Studying Ancient Linear Measurements Across Different Chronologies <span class="core-badge">Core paper</span></span></div>
+        <div class="presentation-row"><span class="pdate">ICOMOS&ndash;CCF 2025</span><span class="ptitle">Forgotten Miti Riyana</span></div>
+        <div class="presentation-row"><span class="pdate">Archaeology Symposium 2026</span><span class="ptitle">Beyond Conventional Narratives: Applying Renfrew and Bahn's Archaeological Paradigms to Re-evaluate Early Buddhist Geography in Sri Lanka</span></div>
+        <div class="presentation-row"><span class="pdate">EAA, forthcoming &middot; oral, via Zoom</span><span class="ptitle">Reconstructing Early Buddhist Landscapes through Inscriptional and Spatial Analysis: An Archaeological Reassessment of Jambud&#299;pa and Taprobane</span></div>
+        <div class="presentation-row"><span class="pdate">EAA, forthcoming &middot; poster</span><span class="ptitle">What the Greeks Knew, and the 19th Century Forgot: Re-mapping Taprobane within Sri Lanka</span></div>
+        <div class="presentation-row"><span class="pdate">Manuscript, in preparation</span><span class="ptitle">Epigraphic Evidence for Sixth-Century BCE Literacy in Jambud&#299;pa: An Inscription-Led Spatial Reconstruction Tested against Canonical Geography</span></div>
+      </div>
+
+      <div class="cert-strip">
+        <img src="media/symposium-certificate.png" alt="Certificate of presentation, National Archaeology Symposium 2026">
+        <div class="cert-note">
+          <span class="cert-label">Verified presentation</span>
+          <p>Certificate of presentation, <em>National Archaeology Symposium 2026</em>, Department of Archaeology of Sri Lanka, 7&ndash;8 July 2026 &mdash; for the paper <em>Beyond Colonial Narratives: Applying Renfrew and Bahn's Archaeological Paradigms to Re-evaluate Early Buddhist Geography in Sri Lanka</em>.</p>
+        </div>
+      </div>
+
+      <div class="gallery">
+        <figure class="g-big"><img src="media/jambudipa-map.png" alt="Composite cartographic synthesis of the reconstructed Jambudipa"><figcaption>Reconstructed Jambud&#299;pa</figcaption></figure>
+        <figure class="g-small"><img src="media/inscription.jpg" alt="Ancient stone inscription"><figcaption>Inscriptions</figcaption></figure>
+        <figure class="g-small"><img src="media/fieldwork1.png" alt="Fieldwork in progress"><figcaption>Fieldwork</figcaption></figure>
+        <figure class="g-small"><img src="media/fieldwork2.png" alt="Site survey work"><figcaption>Site survey</figcaption></figure>
+        <figure class="g-small"><img src="media/landscape.jpeg" alt="Sri Lankan landscape"><figcaption>Landscape</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- BLOG -->
+  <section id="blog">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Blog</div>
+          <h2 class="h">Shorter reads, wider audience</h2>
+        </div>
+        <p class="section-note">Not every idea needs a formal paper first.</p>
+      </div>
+      <div class="blog-grid">
+        <a class="blog-card" href="#"><span class="bno">01</span><h4>From Scalpel to Survey: Precision, Measurement, and the Reinterpretation of Early Buddhist Landscapes</h4></a>
+        <a class="blog-card" href="#"><span class="bno">02</span><h4>Who Was Ratnapala?</h4></a>
+        <a class="blog-card" href="#"><span class="bno">03</span><h4>The Five Great Rivers and the Nadi Chakra of the Amban Ganga</h4></a>
+        <a class="blog-card" href="#"><span class="bno">04</span><h4>Reading Inscriptions in the Field</h4></a>
+        <a class="blog-card" href="#"><span class="bno">05</span><h4>What Archaeologists Can Learn from Ancient Measurements</h4></a>
+        <a class="blog-card" href="#"><span class="bno">06</span><h4>One Island, Two Ancient Measurements: Could the Lost Yojana Unlock the Geography of Early Lanka?</h4></a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about" class="band-light">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">About</div>
+          <h2 class="h">From Scalpel to Shovel</h2>
+        </div>
+        <p class="section-note">Two careers, one guiding habit: question the accepted view, then test it against the evidence.</p>
+      </div>
+
+      <div class="about-grid">
+        <div>
+          <div class="collage">
+            <img class="img-main" src="dr1.jpg" alt="Dr K.L. Fernando in academic regalia">
+            <img class="img-accent" src="dr2.png" alt="Dr K.L. Fernando in the field">
+          </div>
+          <div class="portrait-cap">Dr. K. L. Fernando, MBBS, FRCS, FCSSL &mdash; surgeon turned field researcher</div>
+        </div>
+        <div class="about-copy">
+          <p>My life has been guided by two simple beliefs: that important discoveries often begin by asking questions others have overlooked, and that the free education I received in Sri Lanka placed on me a lifelong obligation to give something back. Curiosity, gratitude, and service have guided everything since &mdash; through a career as a surgeon, a teacher, and now an archaeologist.</p>
+          <p>On <strong>1 June 1992</strong>, as Senior Lecturer in Surgery at the North Colombo Medical College, Ragama, I performed <strong><a href="https://drive.google.com/file/d/1NwzbHKtUB3-F8lVw5QCaY0wrPNcyrpo_/view?usp=sharing">Sri Lanka's first laparoscopic cholecystectomy</strong>.</a> Seventeen years on the Council of the College of Surgeons of Sri Lanka followed, then the Presidency in 2011, and the founding of the College's first dedicated Laparoscopic Skills Centre &mdash; later named the Dr. K. L. Fernando Skills Centre.</p>
+          <p class="pull">"Surgery taught me that progress comes not from accepting established views, but from questioning assumptions, testing evidence, and observing with precision."</p>
+          <p>The second chapter began, unexpectedly, during the COVID-19 lockdown. Time to return to a lifetime's collection of books on archaeology, history, and ancient Sri Lanka surfaced inconsistencies between accepted historical interpretations and the evidence itself. One question &mdash; <strong>what was the true length of the ancient yojana?</strong> &mdash; grew into a Postgraduate Diploma in Archaeology (University of Kelaniya, 2022), then studies in epigraphy and ola leaf manuscripts, and eventually a full multidisciplinary research programme.</p>
+        </div>
+      </div>
+
+      <div class="timeline" id="timeline" style="margin-top:52px;">
+        <div class="tl-item open">
+          <button class="tl-head">
+            <span class="tl-year">1992&ndash;2019</span>
+            <span class="tl-title">Surgical Career and Innovation</span>
+            <span class="tl-plus">+</span>
+          </button>
+          <div class="tl-body"><div class="tl-body-inner">
+            <ul><li>Introduced laparoscopic surgery to Sri Lanka</li><li>Established national laparoscopic skills training</li><li>Built the College of Surgeons Skills Centre</li><li>Trained a new generation of minimally invasive surgeons</li><li>Served as President of the College of Surgeons</li></ul>
+            <span class="tag">"Forty years of surgery taught me that accepted practice must always be tested against evidence."</span>
+          </div></div>
+        </div>
+        <div class="tl-item">
+          <button class="tl-head"><span class="tl-year">2020</span><span class="tl-title">A Question During Lockdown</span><span class="tl-plus">+</span></button>
+          <div class="tl-body"><div class="tl-body-inner">
+            <p>The COVID-19 lockdown provided an unexpected opportunity to revisit a lifetime collection of books on archaeology, history, Buddhism, and ancient Sri Lanka. One simple question changed everything: <strong>&ldquo;What was the true length of the ancient yojana?&rdquo;</strong> It would grow into a multidisciplinary research programme.</p>
+          </div></div>
+        </div>
+        <div class="tl-item">
+          <button class="tl-head"><span class="tl-year">2021&ndash;2022</span><span class="tl-title">Formal Training in Archaeology</span><span class="tl-plus">+</span></button>
+          <div class="tl-body"><div class="tl-body-inner">
+            <ul><li>Diploma in Archaeology</li><li>Extensive field visits</li><li>Study of archaeological methodology</li><li>Beginning of systematic historical reconstruction</li></ul>
+          </div></div>
+        </div>
+        <div class="tl-item">
+          <button class="tl-head"><span class="tl-year">2023</span><span class="tl-title">Learning to Read the Evidence</span><span class="tl-plus">+</span></button>
+          <div class="tl-body"><div class="tl-body-inner">
+            <p>Recognising that inscriptions preserve the earliest historical records, further training followed.</p>
+            <ul><li>Certificate in Epigraphy</li><li>Study of Br&#257;hm&#299; inscriptions</li><li>Ola Leaf Manuscript studies</li><li>Expansion of historical source criticism</li></ul>
+            <span class="tag">For the first time, inscriptions, literary texts, and maps began to be studied together.</span>
+          </div></div>
+        </div>
+        <div class="tl-item">
+          <button class="tl-head"><span class="tl-year">2024</span><span class="tl-title">Recalibrating Ancient Measurements</span><span class="tl-plus">+</span></button>
+          <div class="tl-body"><div class="tl-body-inner">
+            <p>Using evidence from the Arthaśāstra, Lalitavistara, historical metrology, and cartographic analysis, the ancient yojana was recalibrated &mdash; the first major research breakthrough, and a measurable framework for reconstructing ancient geography.</p>
+          </div></div>
+        </div>
+        <div class="tl-item">
+          <button class="tl-head"><span class="tl-year">2025</span><span class="tl-title">Rediscovering Forgotten Metrology</span><span class="tl-plus">+</span></button>
+          <div class="tl-body"><div class="tl-body-inner">
+            <ul><li>Forgotten Miti Riyana</li><li>Ancient systems of measurement</li><li>ICOMOS&ndash;CCF Conference presentation</li><li>Continuing refinement of historical metrology</li></ul>
+          </div></div>
+        </div>
+        <div class="tl-item">
+          <button class="tl-head"><span class="tl-year">2025&ndash;2026</span><span class="tl-title">Recovering Forgotten History</span><span class="tl-plus">+</span></button>
+          <div class="tl-body"><div class="tl-body-inner">
+            <p>Historical detective work uncovered evidence suggesting the Sri Lankan scholar <strong>Ratnapala</strong> played an important role in assisting James Prinsep during the decipherment of the Br&#257;hm&#299; script, reconstructed from nineteenth-century archival reports that had remained largely unnoticed.</p>
+          </div></div>
+        </div>
+        <div class="tl-item">
+          <button class="tl-head"><span class="tl-year">2026</span><span class="tl-title">A New Methodology</span><span class="tl-plus">+</span></button>
+          <div class="tl-body"><div class="tl-body-inner">
+            <p>Years of study culminated in a multidisciplinary framework integrating canonical texts, commentaries, chronicles, pre-Christian Br&#257;hm&#299; inscriptions, cartography, hydrology, archaeology, and ancient metrology &mdash; letting independent datasets be examined together rather than in isolation.</p>
+          </div></div>
+        </div>
+        <div class="tl-item">
+          <button class="tl-head"><span class="tl-year">Now</span><span class="tl-title">Reconstructing Early Buddhist Geography</span><span class="tl-plus">+</span></button>
+          <div class="tl-body"><div class="tl-body-inner">
+            <p>Application of the framework led to the reconstruction of ancient Lank&#257;d&#299;pa, Anur&#257;dhagr&#257;ma, N&#257;gad&#299;pa, Kelaniya, Mah&#257;g&#257;ma, ancient canal navigation, and early Buddhist landscapes &mdash; presented at the Royal Asiatic Society Annual Research Meeting, national archaeology conferences, and international forums.</p>
+            <span class="tag">"The journey continues." &mdash; current work: completing peer-reviewed publications, developing interactive archaeological maps, and expanding this research platform.</span>
+          </div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-band">
+        <div>
+          <h2 class="h">Get in touch</h2>
+          <p>Questions on a specific paper, an invitation to lecture, or a correction to propose &mdash; this reaches me directly.</p>
+        </div>
+        <form class="contact-form" onsubmit="window.location.href='mailto:antiquityrecaliberated@gmail.com?subject=' + encodeURIComponent('Website enquiry from ' + document.getElementById('contactName').value) + '&body=' + encodeURIComponent('Name: ' + document.getElementById('contactName').value + '\nEmail: ' + document.getElementById('contactEmail').value + '\n\nMessage:\n' + document.getElementById('contactMessage').value); return false;">
+          <label for="contactName">Name</label>
+          <input id="contactName" name="name" type="text" placeholder="Your name" required>
+
+          <label for="contactEmail">Email</label>
+          <input id="contactEmail" name="email" type="email" placeholder="you@example.com" required>
+
+          <label for="contactMessage">Message</label>
+          <textarea id="contactMessage" name="message" placeholder="Write your message here" required></textarea>
+
+          <button class="btn primary" type="submit">Send a message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>&copy; Dr K.L. Fernando &middot; Antiquity Recalibrated</div>
+    <div><span class="mono">Discoveries</span> &middot; <span class="mono">Evidence</span> &middot; <span class="mono">Methodology</span> &middot; <span class="mono">Publications</span> &middot; <span class="mono">About</span></div>
+  </div>
+</footer>
+<button id="scrollTopBtn" class="scroll-top-btn" aria-label="Scroll to top">↑</button>
+
+<script src="tmp_script.js"></script>
+
+</body>
+</html>

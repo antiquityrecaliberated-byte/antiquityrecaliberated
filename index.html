@@ -117,6 +117,14 @@
   .hq span{display:block; font-family:'IBM Plex Mono',monospace; color:#ffffff; font-size:0.68rem; margin-bottom:6px;}
   .hq:hover{border-color:var(--bronze); color:#ffffff;}
 
+  footer .footer-links{display:flex; align-items:center; gap:18px; flex-wrap:wrap;}
+  footer .footer-nav{display:flex; gap:12px; flex-wrap:wrap; align-items:center;}
+  footer .footer-nav .mono{color:var(--bronze-bright);}
+  footer .social-links{display:flex; gap:10px; align-items:center;}
+  footer .social-link{display:inline-flex; align-items:center; justify-content:center; width:36px; height:36px; border-radius:50%; background:rgba(139,15,15,0.08); border:1px solid rgba(139,15,15,0.18); color:var(--bronze-bright); text-decoration:none; transition:transform .2s, background .2s;}
+  footer .social-link:hover{background:rgba(139,15,15,0.18); transform:translateY(-1px);}
+  footer .social-link svg{width:18px; height:18px; fill:currentColor;}
+
   /* CHAPTER BREAK — full-bleed photo interludes between sections */
   .chapter-break{position:relative; padding:100px 0; background-size:cover; background-position:center; border-bottom:1px solid var(--rule); border-top:1px solid var(--rule); overflow:hidden;}
   .chapter-break::before{content:""; position:absolute; inset:0; background:linear-gradient(100deg, rgba(27,24,21,0.94) 0%, rgba(27,24,21,0.55) 55%, rgba(27,24,21,0.75) 100%);}
@@ -1399,7 +1407,17 @@
 <footer>
   <div class="wrap">
     <div>&copy; Dr K.L. Fernando &middot; Antiquity Recalibrated</div>
-    <div><span class="mono">Discoveries</span> &middot; <span class="mono">Evidence</span> &middot; <span class="mono">Methodology</span> &middot; <span class="mono">Publications</span> &middot; <span class="mono">About</span></div>
+    <div class="footer-links">
+      <div class="footer-nav"><span class="mono">Discoveries</span> &middot; <span class="mono">Evidence</span> &middot; <span class="mono">Methodology</span> &middot; <span class="mono">Publications</span> &middot; <span class="mono">About</span></div>
+      <div class="social-links">
+        <a class="social-link" href="https://www.youtube.com/@EarlyBuddhistGeography" target="_blank" rel="noopener noreferrer" aria-label="YouTube channel">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.498 6.186a2.99 2.99 0 0 0-2.106-2.114C19.656 3.5 12 3.5 12 3.5s-7.656 0-9.392.572A2.99 2.99 0 0 0 .502 6.186 31.05 31.05 0 0 0 0 12a31.05 31.05 0 0 0 .502 5.814 2.99 2.99 0 0 0 2.106 2.114C4.344 20.5 12 20.5 12 20.5s7.656 0 9.392-.572a2.99 2.99 0 0 0 2.106-2.114A31.05 31.05 0 0 0 24 12a31.05 31.05 0 0 0-.502-5.814ZM9.545 16.568V7.432l6.818 4.568-6.818 4.568Z"/></svg>
+        </a>
+        <a class="social-link" href="https://www.facebook.com/share/19dyiMxoWk/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook page">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12.07C22 6.48 17.52 2 11.93 2 6.48 2 2 6.48 2 12.07 2 17.1 5.66 21.1 10.44 21.97v-7.01H7.9v-2.89h2.54V9.56c0-2.5 1.49-3.88 3.77-3.88 1.09 0 2.23.2 2.23.2v2.45h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.89h-2.34V21.97C18.34 21.1 22 17.1 22 12.07Z"/></svg>
+        </a>
+      </div>
+    </div>
   </div>
 </footer>
 <button id="scrollTopBtn" class="scroll-top-btn" aria-label="Scroll to top">↑</button>

@@ -33,10 +33,10 @@
   @media (prefers-reduced-motion: reduce){ *{animation-duration:.001ms !important; transition-duration:.001ms !important;} }
   h1,h2,h3,h4,.display{font-family:'Fraunces',serif; font-weight:600; letter-spacing:-0.01em; margin:0;}
   .mono{font-family:'IBM Plex Mono',monospace;}
-  a{color:inherit;}
+  a{color:inherit; touch-action:manipulation;}
   .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
   img,svg{display:block; max-width:100%;}
-  button{font:inherit;}
+  button{font:inherit; touch-action:manipulation;}
 
   .google-translate-widget{display:none !important; visibility:hidden !important; width:0 !important; height:0 !important; overflow:hidden !important; position:absolute !important; left:-9999px !important; top:-9999px !important;}
   body > .skiptranslate{display:none !important;}
@@ -49,7 +49,7 @@
   .hook-row{display:grid; grid-template-columns:auto 1fr auto; align-items:flex-start; gap:24px;}
   .hook-side-wrap{display:flex; flex-direction:column; justify-content:flex-end; align-items:center; text-align:center;}
   .hook-side{width:170px; max-width:170px; height:auto; object-fit:contain;}
-  .hook-side-caption{font-size:0.62rem; color:var(--ink-dim); margin-top:8px; line-height:1.3; max-width:170px;}
+  .hook-side-caption{font-size:10pt; color:var(--ink-dim); margin-top:8px; line-height:1.3; max-width:170px;}
   .hook-body{text-align:center;}
   .hook .hook-q{font-size:clamp(1.7rem,3.6vw,2.5rem); line-height:1.18; color:var(--ink); margin:0;}
   .hook p{font-size:1.08rem; color:var(--ink-dim); margin:20px 0 0;}
@@ -72,7 +72,10 @@
   /* NAV */
   header.site{position:sticky; top:0; z-index:50; background:rgba(243,234,210,0.93); backdrop-filter:blur(8px); border:1px solid rgba(0,0,0,0.08); border-bottom:none; border-radius:0 0 16px 16px;}
   .navbar{display:flex; align-items:center; justify-content:space-between; padding:15px 32px; max-width:var(--max); margin:0 auto; gap:20px; flex-wrap:wrap;}
-  .nav-actions{display:flex; align-items:center; gap:14px;}
+  @media (max-width:920px){
+    .navbar{padding:12px 16px;}
+  }
+  .nav-actions{display:flex; align-items:center; gap:14px; z-index:51; position:relative;}
   .wordmark{font-family:'Fraunces',serif; font-size:1.05rem; font-weight:600; text-decoration:none; color:var(--ink); line-height:1.1;}
   .wordmark em{color:var(--bronze-bright); font-style:italic; font-weight:500;}
   .wordmark small{display:block; font-family:'IBM Plex Mono',monospace; font-size:0.62rem; color:var(--ink-dim); font-weight:400; letter-spacing:0.06em; margin-top:2px;}
@@ -80,10 +83,20 @@
   nav.links a{text-decoration:none; color:var(--ink-dim); font-size:0.76rem; text-transform:uppercase; letter-spacing:0.06em; border-bottom:1px solid transparent; padding-bottom:3px; transition:color .2s, border-color .2s; white-space:nowrap;}
   nav.links a:hover, nav.links a:focus-visible{color:var(--bronze-bright); border-color:var(--bronze);}
   .nav-cta{background:var(--bronze); color:#ffffff !important; padding:8px 15px; border-radius:20px; font-weight:500;}
-  .menu-btn{display:none; background:none; border:1px solid var(--rule); color:var(--ink); border-radius:6px; padding:7px 12px; font-size:0.85rem;}
+  .menu-btn{display:none; background:none; border:1px solid var(--rule); color:var(--ink); border-radius:6px; padding:10px 16px; font-size:0.85rem; cursor:pointer; min-height:44px; min-width:44px; position:relative;}
+  .menu-btn:hover{background:rgba(139,15,15,0.08);}
+  .menu-btn::before{content:'☰'; font-size:1.5rem; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%);}
+  .menu-btn{font-size:0;}
+  
+  /* SCROLL TO TOP BUTTON */
+  .scroll-top-btn{position:fixed; bottom:-60px; right:32px; width:48px; height:48px; background:var(--bronze); color:#ffffff; border:none; border-radius:50%; cursor:pointer; font-size:1.2rem; font-weight:bold; z-index:40; transition:bottom .3s ease; display:flex; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(139,15,15,0.3); min-height:48px; min-width:48px;}
+  .scroll-top-btn:hover{background:var(--bronze-bright); transform:scale(1.05);}
+  .scroll-top-btn.show{bottom:24px;}
+  @media (max-width:760px){.scroll-top-btn{width:44px; height:44px; right:16px; bottom:-50px;}}
   @media (max-width:920px){
-    nav.links{position:fixed; inset:58px 0 0 0; background:var(--stone-900); flex-direction:column; align-items:flex-start; padding:26px 32px; gap:18px; transform:translateY(-110%); transition:transform .3s ease; overflow-y:auto;}
+    nav.links{position:fixed; inset:58px 0 0 0; background:var(--stone-900); flex-direction:column; align-items:flex-start; padding:26px 32px; gap:18px; transform:translateY(-110%); transition:transform .3s ease; overflow-y:auto; z-index:49; max-height:calc(100vh - 58px); will-change:transform;}
     nav.links.open{transform:translateY(0);}
+    nav.links a{padding:12px 0; min-height:44px; display:flex; align-items:center;}
     .menu-btn{display:block;}
   }
 
@@ -145,12 +158,12 @@
   @media (max-width:800px){ .collage{height:auto; padding-bottom:70px;} }
   .collage img{position:absolute; object-fit:cover; box-shadow:0 20px 46px -18px rgba(0,0,0,0.4); border:6px solid #f7f1de;}
   .collage .img-main{width:82%; height:320px; top:0; left:0; z-index:1;}
-  .collage .img-accent{width:56%; height:190px; bottom:0; right:0; z-index:2;}
+  .collage .img-accent{width:56%; height:190px; bottom:-40px; right:0; z-index:2;}
   @media (max-width:800px){
     .collage .img-main{position:relative; width:100%; height:280px;}
     .collage .img-accent{position:absolute; width:52%; height:160px; bottom:-70px; right:0;}
   }
-  .portrait-cap{font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--ink-dim); margin-top:10px;}
+  .portrait-cap{font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--ink-dim); margin-top:40px;}
   .about-copy p{color:var(--ink-dim); font-size:0.96rem; margin:0 0 16px;}
   .about-copy strong{color:var(--ink);}
   .pull{font-family:'Fraunces',serif; font-style:italic; font-size:1.2rem; color:var(--vermilion); margin:22px 0; line-height:1.4;}
@@ -313,8 +326,9 @@
     body{font-size:16px;}
     .wrap{padding:0 16px;}
     section{padding:36px 0;}
-    .navbar{padding:15px 16px;}
-    nav.links{padding:28px 20px 24px;}
+    .navbar{padding:12px 16px; gap:12px;}
+    nav.links{padding:20px 16px 24px;}
+    .menu-btn{min-height:48px; min-width:48px;}
     .hero-copy{padding:30px 0 24px;}
     .hero .hook-follow, .hero p{font-size:0.95rem;}
     .hook .hook-q{font-size:clamp(1.8rem, 7vw, 2.4rem);}
@@ -511,7 +525,7 @@
   <div class="navbar">
     <a class="wordmark" href="#top">Antiquity <em>Recalibrated</em><small>Dr K.L. Fernando</small></a>
     <div class="nav-actions">
-      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="siteNav">Menu</button>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="siteNav" aria-label="Toggle navigation menu"></button>
     </div>
     <nav class="links" id="siteNav">
       <a href="#discoveries">Discoveries</a>
@@ -575,7 +589,7 @@
         </div>
         <div class="hook-side-wrap">
           <img class="hook-side" src="boo.png" alt="Right decorative image">
-          <p class="hook-side-caption">බෝධිය වැඩම වූ රත්රං කටාහය නව රියනක් වට ඇති, පස් රියනක් උස ඇති, තුන් රියනක් පුළුල ඇති අඟුලක් බොල ඇති. ඇත් නඹකුගේ සොඬක පමන මුව විටි ඇති.</p>
+          <p class="hook-side-caption">“The golden vessel in which the Bodhi tree was brought measured nine cubits in circumference, five cubits in height and three cubits in width. It was one finger-breadth thick, and its rim was as broad as the trunk of a young elephant.”</p>
         </div>
       </div>
     </div>
@@ -627,9 +641,9 @@
               <p class="corr-caveat">Individually inconclusive &mdash; neither name was unique to one person &mdash; but treated as part of a cumulative dossier tested alongside chronology, place-names, routes, and archaeology. An equivalent survey of Indian inscriptions and Sanskrit/Prakrit name-variants has not yet been completed for comparison.</p>
             </div>
             <figure class="col disc-figure">
-              <a href="https://drive.google.com/file/d/1_Eqma2h2BGS7RJ4dF9l7mhPYiakYa9ig/view?usp=sharing" target="_blank" rel="noopener noreferrer">
-                <img src="media/jambudipa-map.png" alt="Composite cartographic synthesis of the reconstructed Jambudipa">
-              </a>
+              
+                <img src="Composite.jpeg" alt="Composite cartographic synthesis of the reconstructed Jambudipa">
+              
               <figcaption>Fig. 3 &mdash; Composite cartographic synthesis of the reconstructed Jambud&#299;pa</figcaption>
             </figure>
           </div></div>
@@ -840,8 +854,8 @@
 
       <div class="dtest">
         <div class="dtest-figure">
-          <img src="media/elahera-distance-map.jpg" alt="One-inch survey map with a tape measure showing 13.5 inches from the Brahmanayagama area to the Kantalai area">
-          <figcaption>One-inch-to-one-mile survey map: the measured distance from the Brahmanayagama (Ves&#257;l&#299;) area southeast toward Kantalai reads &asymp; 13.5 inches &mdash; that is, 13.5 miles.</figcaption>
+          <img src="kantalai.jpeg" alt="One-inch survey map with a tape measure showing 13.5 inches from the Brahmanayagama area to the Kantalai area">
+          <figcaption>the measured distance from the Brahamanayagama monastic complex ( Valikaramaya in Vesāli ) towards southeast to Kantalai tank where Elahera Yodha Ela joins and provide boat services. 3 Yojana ≈ 13.5 inches on the map  — that is, 13.5 miles.</figcaption>
         </div>
         <div class="dtest-steps">
           <div class="dstep">
@@ -978,24 +992,26 @@
 
       <div class="map-figures">
         <figure class="mapfig">
-          <img src="media/brahmanawewa-map.jpg" alt="One-inch survey map extract of the Brahmanawewa and Horowpotana area">
+          <img src="horowpathana.jpeg" alt="One-inch survey map extract of the Brahmanawewa and Horowpotana area">
           <figcaption><strong>Brahmanawewa, Horowpotana.</strong> The Survey of Ceylon sheet itself marks an &ldquo;Ancient Site,&rdquo; a stone bridge, and a causeway here &mdash; the government's own map recording early remains at the point proposed for V&#257;lik&#257;r&#257;ma in the Ves&#257;l&#299; zone.</figcaption>
         </figure>
         <figure class="mapfig">
-          <img src="media/horowpotana-old-map.jpg" alt="Older monochrome survey map of the Horowpotana area showing ruins">
+          <img src="no4map.jpeg" alt="Older monochrome survey map of the Horowpotana area showing ruins">
           <figcaption><strong>Horowpotana (earlier survey).</strong> The older sheet records <em>Brahakamana Wewa</em> and marks &ldquo;Ruins&rdquo; near Kudahelambewa &mdash; independent cartographic corroboration of monastic remains in the same landscape.</figcaption>
         </figure>
         <figure class="mapfig mapfig--wide">
-          <img src="media/yodha-ela-kantalai.jpg" alt="One-inch survey map of the Kantalai Tank area showing the Yodha Ela channel">
+          <img src="yodhaela.jpeg" alt="One-inch survey map of the Kantalai Tank area showing the Yodha Ela channel">
           <figcaption><strong>Kantalai Tank and the Yodha Ela.</strong> A major ancient canal traverses this landscape toward Trincomalee. Its course and antiquity are documented in R.L. Brohier's <em>Ancient Irrigation Works in Ceylon</em> and the Tamankaduwa&ndash;El&#257;hera&ndash;Minneriya studies, and in Anuradha Seneviratna's <em>The Springs of Sinhala Civilization</em>. The canal's identification with the canonical &ldquo;Ga&#7749;g&#257;&rdquo; is a separate proposal of this project, still under test.</figcaption>
         </figure>
         <figure class="mapfig mapfig--wide">
-          <img src="media/kapilavatthu-anoma-distance-calibration.png" alt="Slide showing the Lalitavistara's 7-yojana distance from Kapilavastu to the Anomā River, converted to 31.5 miles and verified by direct measurement on the one-inch survey map from Katugastota to the Mahaveli River crossing at Buddhankotte, with Ambagahapelessa (proposed Anupiya-ambavana) marked near the Kiwulegedara ruins">
+          <img src="7yojana.jpeg" alt="Slide showing the Lalitavistara's 7-yojana distance from Kapilavastu to the Anomā River, converted to 31.5 miles and verified by direct measurement on the one-inch survey map from Katugastota to the Mahaveli River crossing at Buddhankotte, with Ambagahapelessa (proposed Anupiya-ambavana) marked near the Kiwulegedara ruins">
           <figcaption><strong>Distance calibration: Kapilavatthu to the Anomā.</strong> The Lalitavistara's stated 7-yojana journey (31.5 miles at the recalibrated yojana) is checked directly against the one-inch map: a straight-line measurement from Katugastota to the Mahaveli crossing at Buddhankotte comes out at the same 31.5 miles, with Ambagahapelessa &mdash; the proposed Anupiya-ambavana &mdash; marked nearby.</figcaption>
         </figure>
         <figure class="mapfig mapfig--wide">
-          <img src="media/vesali-vajji-case-study-2.png" alt="Map of the Vavuniya–Padaviya–Medawachchiya–Horowpothana–Anuradhapura–Gal Oya survey sheets marking major inscriptional clusters, with a table of named-individual correlations: IC 332 Rohiṇī Sāmaṇiyā, IC 346 a Vesālī-puta donor, IC 328 and IC 166 Nāthika/Nādika references, and IC 155 Ānanda Thera's Vālikārāma">
-          <figcaption><strong>Reconstructing the Ves\u0101l\u012b\u2013Vajji landscape.</strong> After all 1,234 inscriptions were plotted independently of the texts, a dense cluster emerged across Vavuniya, Medawachchiya, Horowpothana, and Gal Oya. Only then was it checked against the canon: IC 332 (Rohi\u1e47\u012b S\u0101ma\u1e47iy\u0101), IC 346 (a Ves\u0101l\u012b-born donor), IC 328 and IC 166 (N\u0101thika/N\u0101dika), and IC 155 (\u0100nanda Thera's V\u0101lik\u0101r\u0101ma) all fall within it.</figcaption>
+          <img src="vavuniya.jpeg" alt="Maps of the Vavunia, Medawachchiya , Horowpathana area shows major inscriptional clusters with 100 inscriptions. IC 332 Rohini Samaniya, IC 346 Vesali puta, IC 328 and IC 166  Nāthika / Nādika references , and IC 155 Ānanda Thera . This is likely to be Valikaramaya in Vesali Buddha and Ananda lived.">
+          <figcaption><strong>Reconstructing the Vesālī–Vajji Landscape
+
+Composite Survey maps of Vavuniya, Padaviya, Medawachchiya and Horowpothana reveal major clusters comprising more than 100 early Brāhmī inscriptions. These include IC 332 (Rohiṇī Sāmaṇiyā), IC 346 (Vesālī-puta), IC 328 and IC 166 (Nāthika/Nādika), and IC 155 (Ānanda Thera). Their convergence supports testing this landscape as the canonical Vesālī region, including the proposed identification of Vālikārāma, where the Buddha and Ānanda resided.</figcaption>
         </figure>
         <figure class="mapfig mapfig--wide">
           <img src="media/vesali-case-study-3-metrology.png" alt="Slide showing the Mahāparinibbāna Sutta's 3-yojana Gaṅgā-to-Vesālī distance converted to 13.5 miles and matched by direct measurement on the one-inch survey map, with the Elāhera Yodha Ela proposed as the canonical navigable waterway">
@@ -1073,7 +1089,7 @@
 
       <div class="source-feature">
         <figure class="source-img">
-          <img src="test.png" alt="Cover of the 1916 printed edition of the Sirilaka Kadaim Pota">
+          <img src="kadaimpotha.jpeg" alt="Cover of the 1916 printed edition of the Sirilaka Kadaim Pota">
           <figcaption>Sirilaka Kadaim Pota, printed edition of 1916 (B.E. 2460), ed. K.M.S. de Silva</figcaption>
         </figure>
         <div class="source-body">

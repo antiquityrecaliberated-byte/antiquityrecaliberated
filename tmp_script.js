@@ -1,12 +1,61 @@
 (function(){
     var btn = document.getElementById('menuBtn');
     var nav = document.getElementById('siteNav');
-    btn.addEventListener('click', function(){
-      var open = nav.classList.toggle('open');
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    var isMenuOpen = false;
+
+    function closeMenu(){
+      nav.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      isMenuOpen = false;
+      document.body.style.overflow = '';
+    }
+
+    function openMenu(){
+      nav.classList.add('open');
+      btn.setAttribute('aria-expanded', 'true');
+      isMenuOpen = true;
+      document.body.style.overflow = 'hidden';
+    }
+
+    function toggleMenu(){
+      if(isMenuOpen){
+        closeMenu();
+      } else {
+        openMenu();
+      }
+    }
+
+    // Menu button click handler
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      toggleMenu();
     });
+
+    // Close menu when a navigation link is clicked
     nav.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){ nav.classList.remove('open'); btn.setAttribute('aria-expanded','false'); });
+      a.addEventListener('click', function(){
+        closeMenu();
+      });
+    });
+
+    // Close menu when Esc key is pressed
+    document.addEventListener('keydown', function(e){
+      if(e.key === 'Escape' && isMenuOpen){
+        closeMenu();
+        btn.focus();
+      }
+    });
+
+    // Close menu when clicking outside of it
+    document.addEventListener('click', function(e){
+      if(isMenuOpen && !nav.contains(e.target) && !btn.contains(e.target)){
+        closeMenu();
+      }
+    });
+
+    // Prevent menu from closing when clicking inside it
+    nav.addEventListener('click', function(e){
+      e.stopPropagation();
     });
 
     function initLanguageSwitcher(){

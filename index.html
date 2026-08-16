@@ -198,8 +198,14 @@
   .prog-no{font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--bronze-bright);}
   .prog-card h3{font-size:1.02rem; margin-top:8px; color:var(--ink);}
   .prog-tags{margin-top:10px; font-size:0.78rem; color:var(--ink-dim);}
-  .prog-desc{max-height:0; opacity:0; overflow:hidden; font-size:0.85rem; color:var(--ink-dim); transition:max-height .35s ease, opacity .3s ease, margin-top .35s ease;}
-  .prog-card:hover .prog-desc, .prog-card:focus-within .prog-desc{max-height:140px; opacity:1; margin-top:12px;}
+.prog-desc {
+    max-height: none;
+    opacity: 1;
+    overflow: visible;
+    font-size: 0.85rem;
+    color: var(--ink-dim);
+    margin-top: 12px;
+}
 
   /* DISCOVERIES accordion */
   .disc-list{border-top:1px solid var(--rule);}
@@ -595,6 +601,14 @@
     </div>
   </section>
 
+   <div style="display: flex; justify-content: center; align-items: center; gap: 50px; width: 100%;">
+    <img src="issinhala.png" alt="Sinhala">
+    <img src="isenglish.png" alt="English">
+</div>
+
+
+
+
   <!-- HERO -->
   <section class="hero">
     <div class="hero-media"><img src="white.png" alt="Historic Sri Lankan landscape and archive imagery"></div>
@@ -661,7 +675,7 @@
             <div class="col"><span>Summary</span><p>Greek sources describe Taprobane as a landmass &ldquo;separated from the mainland by a river&rdquo; &mdash; a detail present in Megasthenes and Arrian but dropped from some twentieth-century translations. Read against the D&#299;pava&#7747;sa's own dimensions for Lank&#257;d&#299;pa/Tambapa&#7751;&#7751;i (32 &times; 18 yojanas) and Fa-Hien's dimensions for the country of Sinhala (50 &times; 30 yojanas), and converted using the recalibrated 4.5-mile yojana, Taprobane resolves not as the whole island but as one coherent region within it.</p></div>
             <div class="col"><span>Evidence</span><p>Megasthenes' <em>Indica</em> and Arrian, compared against J. W. McCrindle's 19th-century translation and later facsimile editions; D&#299;pava&#7747;sa Chapter XVII; Fa-Hien's account of Sinhala; and a cartographic correlation in which Lank&#257;d&#299;pa's 32 &times; 18-yojana dimensions align almost exactly with an 8 &times; 3 block of one-inch-to-one-mile Survey of Ceylon sheets.</p></div>
             <figure class="col disc-figure">
-              <img src="media/taprobane-poster.png" alt="Poster: What the Greeks Knew, and the 19th Century Forgot — Re-mapping Taprobane within Sri Lanka">
+              <img src="greeks.jpg" alt="Poster: What the Greeks Knew, and the 19th Century Forgot — Re-mapping Taprobane within Sri Lanka">
               <figcaption>Poster #311 &mdash; European Association of Archaeologists (forthcoming)</figcaption>
             </figure>
           </div></div>
@@ -1037,38 +1051,38 @@ Composite Survey maps of Vavuniya, Padaviya, Medawachchiya and Horowpothana reve
         <div class="prog-card" tabindex="0">
           <svg class="prog-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M8 8h1M8 12h1M8 16h1M12 8h4M12 12h4M12 16h2"/></svg>
           <h3>Epigraphy</h3>
-          <div class="prog-tags">Readings &middot; transliteration &middot; translation</div>
-          <div class="prog-desc">Inscription numbers, donor and monastic names, findspots, and dates, cross-referenced against canonical figures.</div>
+          <div class="prog-tags">Published corpus · field verification · spatial analysis</div>
+          <div class="prog-desc">The primary epigraphic dataset is drawn from S. Paranavitana’s Inscriptions of Ceylon, Volume I, including its inscription numbers, readings, personal and monastic names, findspots and palaeographic dating. Selected locations—including sites in the Vavuniya and Dambulla regions—were visited to examine their physical setting, verify geographical relationships and understand the inscriptions within their wider monastic landscape</div>
         </div>
         <div class="prog-card" tabindex="0">
           <svg class="prog-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg>
           <h3>Cartography</h3>
-          <div class="prog-tags">One-inch survey sheets &middot; overlays</div>
-          <div class="prog-desc">Historical Survey of Ceylon maps overlaid with modern geography to plot routes, distances, and boundaries.</div>
+          <div class="prog-tags">Historical survey maps · spatial overlays</div>
+          <div class="prog-desc">One-inch Survey of Ceylon maps are assembled as continuous geographical fields and compared with modern mapping. Inscriptions, settlements, routes, distances, waterways and proposed historical boundaries are plotted and tested spatially.</div>
         </div>
         <div class="prog-card" tabindex="0">
           <svg class="prog-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 4h9l3 3v13H6z"/><path d="M10 9h5M10 13h5M10 17h3"/></svg>
           <h3>Canonical Literature</h3>
-          <div class="prog-tags">Tripi&#7789;aka &middot; A&#7789;&#7789;hakath&#257; &middot; chronicles</div>
-          <div class="prog-desc">Geographical descriptions, routes, and distances drawn from the Canon, its commentaries, and the Mah&#257;va&#7747;sa/D&#299;pava&#7747;sa.</div>
+          <div class="prog-tags">Tipiṭaka · Aṭṭhakathā · chronicles</div>
+          <div class="prog-desc">Geographical descriptions, journeys, distances, political regions and monastic centres are drawn from the Pāli Canon, its commentaries and chronicles such as the Mahāvaṃsa and Dīpavaṃsa, before being tested against material and geographical evidence.</div>
         </div>
         <div class="prog-card" tabindex="0">
           <svg class="prog-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>
           <h3>Metrology</h3>
-          <div class="prog-tags">Yojana &middot; Riyana &middot; A&#7749;gula &middot; Vidatthi</div>
-          <div class="prog-desc">Every unit's textual definition, proposed value, historical variation, and a practical geographical test.</div>
+          <div class="prog-tags">Yojana · riyana · aṅgula · vidatthi</div>
+          <div class="prog-desc">Ancient units are examined through their textual definitions, component measures, chronological development and historical variation. Each proposed value is then tested against measurable objects, recorded distances and physical geography.</div>
         </div>
         <div class="prog-card" tabindex="0">
           <svg class="prog-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M3 18c3-6 6 3 9-3s6 3 9-3"/><path d="M3 12c3-6 6 3 9-3s6 3 9-3"/></svg>
           <h3>Hydrology</h3>
-          <div class="prog-tags">Rivers &middot; canals &middot; tanks &middot; ports</div>
-          <div class="prog-desc">Waterways read as functional movement corridors linking settlements, monasteries, and ancient ports.</div>
+          <div class="prog-tags">Rivers · canals · tanks · ports</div>
+          <div class="prog-desc">Natural rivers and engineered waterway canals are examined as functional corridors connecting settlements, monasteries and ancient ports. Proposed routes are tested against direction, gradient, continuity, navigability and the surrounding terrain.</div>
         </div>
         <div class="prog-card" tabindex="0">
           <svg class="prog-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 21h16M6 21V9l6-5 6 5v12M10 21v-6h4v6"/></svg>
           <h3>Archaeology &amp; Settlement</h3>
-          <div class="prog-tags">Excavations &middot; st&#363;pas &middot; caves &middot; roads</div>
-          <div class="prog-desc">Settlement plans, monastic complexes, and securely dated material remains anchoring the textual record in place.</div>
+          <div class="prog-tags">Monasteries · caves · roads · settlements</div>
+          <div class="prog-desc">Archaeological remains are examined within their wider settlement landscape. Monastic complexes, inscriptional caves, ancient roads, hydraulic works and habitation zones provide the material setting against which textual and geographical identifications are tested.</div>
         </div>
       </div>
     </div>
@@ -1255,7 +1269,7 @@ Composite Survey maps of Vavuniya, Padaviya, Medawachchiya and Horowpothana reve
       </div>
 
       <div class="cert-strip">
-        <img src="media/symposium-certificate.png" alt="Certificate of presentation, National Archaeology Symposium 2026">
+        <img src="nasc.jpg" alt="Certificate of presentation, National Archaeology Symposium 2026">
         <div class="cert-note">
           <span class="cert-label">Verified presentation</span>
           <p>Certificate of presentation, <em>National Archaeology Symposium 2026</em>, Department of Archaeology of Sri Lanka, 7&ndash;8 July 2026 &mdash; for the paper <em>Beyond Colonial Narratives: Applying Renfrew and Bahn's Archaeological Paradigms to Re-evaluate Early Buddhist Geography in Sri Lanka</em>.</p>
@@ -1264,10 +1278,10 @@ Composite Survey maps of Vavuniya, Padaviya, Medawachchiya and Horowpothana reve
 
       <div class="gallery">
         <figure class="g-big"><img src="media/jambudipa-map.png" alt="Composite cartographic synthesis of the reconstructed Jambudipa"><figcaption>Reconstructed Jambud&#299;pa</figcaption></figure>
-        <figure class="g-small"><img src="media/inscription.jpg" alt="Ancient stone inscription"><figcaption>Inscriptions</figcaption></figure>
-        <figure class="g-small"><img src="media/fieldwork1.png" alt="Fieldwork in progress"><figcaption>Fieldwork</figcaption></figure>
-        <figure class="g-small"><img src="media/fieldwork2.png" alt="Site survey work"><figcaption>Site survey</figcaption></figure>
-        <figure class="g-small"><img src="media/landscape.jpeg" alt="Sri Lankan landscape"><figcaption>Landscape</figcaption></figure>
+        <figure class="g-small"><img src="ancient.jpeg" alt="Ancient stone inscription"><figcaption>Inscriptions</figcaption></figure>
+        <figure class="g-small"><img src="field.jpeg" alt="Fieldwork in progress"><figcaption>Fieldwork</figcaption></figure>
+        <figure class="g-small"><img src="site.jpeg" alt="Site survey work"><figcaption>Site survey</figcaption></figure>
+        <figure class="g-small"><img src="insearch.jpeg" alt="Sri Lankan landscape"><figcaption>⁠In search of ancient site</figcaption></figure>
       </div>
     </div>
   </section>
@@ -1284,14 +1298,75 @@ Composite Survey maps of Vavuniya, Padaviya, Medawachchiya and Horowpothana reve
         </div>
         <p class="section-note">Not every idea needs a formal paper first.</p>
       </div>
-      <div class="blog-grid">
-        <a class="blog-card" href="#"><span class="bno">01</span><h4>From Scalpel to Survey: Precision, Measurement, and the Reinterpretation of Early Buddhist Landscapes</h4></a>
-        <a class="blog-card" href="#"><span class="bno">02</span><h4>Who Was Ratnapala?</h4></a>
-        <a class="blog-card" href="#"><span class="bno">03</span><h4>The Five Great Rivers and the Nadi Chakra of the Amban Ganga</h4></a>
-        <a class="blog-card" href="#"><span class="bno">04</span><h4>Reading Inscriptions in the Field</h4></a>
-        <a class="blog-card" href="#"><span class="bno">05</span><h4>What Archaeologists Can Learn from Ancient Measurements</h4></a>
-        <a class="blog-card" href="https://drive.google.com/file/d/1lMadLqTW2GNT4PKmWeFsPxRPVfZvl7UO/view?usp=sharing"><span class="bno">06</span><h4>One Island, Two Ancient Measurements: Could the Lost Yojana Unlock the Geography of Early Lanka?</h4></a>
-      </div>
+     <div class="blog-grid">
+
+    <details class="blog-card">
+        <summary>
+            <span class="bno">01</span>
+            <h4>From Scalpel to Survey: Precision, Measurement, and the Reinterpretation of Early Buddhist Landscapes</h4>
+        </summary>
+        <p>
+            An exploration of how precision, measurement, and modern surveying methods
+            can help reinterpret the landscapes associated with Early Buddhism.
+        </p>
+    </details>
+
+    <details class="blog-card">
+        <summary>
+            <span class="bno">02</span>
+            <h4>Who Was Ratnapala?</h4>
+        </summary>
+        <p>
+            Ratnapala was a Ceylonese Pāli scholar and former Buddhist monk whose contribution to the decipherment of Brāhmī has been largely forgotten. Trained in Sri Lanka’s monastic tradition, he later learned Burmese in Arakan before settling in Calcutta. Records of the Asiatic Society show him interpreting Pāli and Burmese inscriptions and assisting James Prinsep with important passages in the Delhi pillar inscription. Ratnapala should not be regarded as the sole decipherer of Brāhmī, but the surviving evidence identifies him as a significant collaborator. His story restores an overlooked Sri Lankan contribution to the foundations of modern South Asian epigraphy.
+        </p>
+    </details>
+
+    <details class="blog-card">
+        <summary>
+            <span class="bno">03</span>
+            <h4>The Five Great Rivers and the Nadi Chakra of the Amban Ganga</h4>
+        </summary>
+        <p>
+            The Sela Sutta Vaṇṇanā preserves a geographical description associated with *Thiyaggala Kanda Pio, a Sinhala expression linked to the surrounding landscape. The name **Umma Ganga* also remains in local use. The canonical Nadī Chakra, associated with Sāvatthi and the palace of King Kosol, can be identified clearly on the one-inch Survey map. The text describes the king observing monks bathing in the river from his palace balcony. Within the Amban Ganga system, five major rivers flowing eastward remain identifiable. Their direction, convergence and relationship to the terrain provide a testable framework for reconstructing this canonical landscape.
+        </p>
+    </details>
+
+    <details class="blog-card">
+        <summary>
+            <span class="bno">04</span>
+            <h4>Reading Inscriptions in the Field</h4>
+        </summary>
+        <p>
+            Field documentation includes a careful eye copy, detailed photography and, where conservation conditions permit, an estampage that records the carved surface at full scale. The inscription is examined under changing angles of light to distinguish intentional strokes from cracks, weathering and natural irregularities. These records are then studied in the office, where each letter is compared with established palaeographic forms, published readings and contemporary language. Modern 3D photogrammetry has greatly improved this process by creating a measurable surface model that can reveal shallow or damaged strokes. The final reading therefore combines field observation, estampage, photography, digital modelling and comparative analysis.
+        </p>
+    </details>
+
+    <details class="blog-card">
+        <summary>
+            <span class="bno">05</span>
+            <h4>What Archaeologists Can Learn from Ancient Measurements</h4>
+        </summary>
+        <p>
+            Ancient measurements connect written descriptions with physical reality. The recovered *Miti Riyana, measuring approximately four inches, produces practical dimensions for objects described in Buddhist literature, including the Buddha’s recorded height, ritual vessels, funeral structures and ceremonial objects. At a geographical scale, the recalibrated **Buddhist yojana of approximately 4.5 miles* allows journeys, kingdoms and distances to be tested against maps, terrain and waterways. Together, these units demonstrate why later measurements should not be projected backwards onto earlier texts. Recovering the correct scale can transform an apparently exaggerated description into measurable archaeological evidence—and reopen questions about ancient landscapes, technologies and practices.
+        </p>
+    </details>
+
+    <details class="blog-card">
+        <summary>
+            <span class="bno">06</span>
+            <h4>One Island, Two Ancient Measurements: Could the Lost Yojana Unlock the Geography of Early Lanka?</h4>
+        </summary>
+        <p>
+            Two ancient sources describe the same island in yojanas, yet preserve strikingly different dimensions. The Dīpavaṃsa records Lankādīpa as 32 by 18 yojanas, while Faxian describes Sinhala as 50 by 30. This research asks whether they measured different territories and whether later, enlarged definitions of the yojana distorted the original geography. Recalibrating the early Buddhist yojana to approximately 4.5 miles produces proportions that can be tested against Sri Lanka’s landscape, routes and place-names. The question is not merely how large the island was, but what Lankādīpa and Sinhala meant to the writers who preserved these measurements.
+        </p>
+
+        <a href="https://drive.google.com/file/d/1lMadLqTW2GNT4PKmWeFsPxRPVfZvl7UO/view?usp=sharing"
+           target="_blank">
+            Read Full Article
+        </a>
+    </details>
+
+</div>
     </div>
   </section>
 
